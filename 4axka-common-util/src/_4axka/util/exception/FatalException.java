@@ -14,7 +14,7 @@
 package _4axka.util.exception;
 
 
-public class FatalException extends RuntimeException {
+public class FatalException extends Exception {
     private static final long serialVersionUID = -5648421652329450549L;
 
     public FatalException() {}
