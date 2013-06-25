@@ -34,7 +34,7 @@ public final class ToString {
             int collectionIndex_ = 0;
             final Iterator<?> items_ = collection.iterator();
             while (items_.hasNext() && collectionIndex_++ < depth) {
-                builder_.append(items_.next().toString());
+                builder_.append(wrap(items_.next()).toString());
                 if (collectionIndex_ > 0 && items_.hasNext()) {
                     builder_.append(", ");
                 }
