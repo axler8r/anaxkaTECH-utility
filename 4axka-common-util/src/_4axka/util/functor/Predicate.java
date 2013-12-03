@@ -18,9 +18,8 @@ import java.io.Serializable;
 
 
 public interface Predicate<
-                R extends Serializable,
-                P extends Serializable,
+                S extends Serializable,
                 T extends Throwable> extends
         Serializable {
-    R match(final P parameter) throws T;
+    boolean match(final S subject) throws T;
 }
