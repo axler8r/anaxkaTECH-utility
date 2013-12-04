@@ -1,53 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package _4axka.util.lang;
 
-/**
- *
- * @author adolf.mattheus
- */
 public class Equals {
-    public static final <T> boolean isDifferentTypes(final T lhs, final T rhs) {
-        return !(rhs.getClass().isAssignableFrom(lhs.getClass()));
+
+    public static final <T> boolean isEquatable(final T lhs, final T rhs) {
+        return !isSameObject(lhs, rhs) && !isNull(rhs) && isAssignmentCompatible(lhs, rhs);
     }
-    
-    public static final <T> boolean isEqual(final T lhs, final T rhs) {
-        return (lhs != null) && (rhs != null) && lhs.equals(rhs);
+
+    public static EqualsBuilder equalsBuilder() {
+        return new EqualsBuilderImpl();
     }
-    
-    public static final boolean isEqual(final byte lhs, final byte rhs) {
+
+    private static <T> boolean isSameObject(final T lhs, final T rhs) {
         return lhs == rhs;
     }
 
-    public static final boolean isEqual(final short lhs, final short rhs) {
-        return lhs == rhs;
+    private static <T> boolean isNull(final T subject) {
+        return subject == null;
     }
 
-    public static final boolean isEqual(final int lhs, final int rhs) {
-        return lhs == rhs;
+    private static <T> boolean isAssignmentCompatible(final T lhs, final T rhs) {
+        // TODO: make this bulletproof...
+        return (lhs == null && rhs == null)
+                || (lhs != null && rhs != null && rhs.getClass().isAssignableFrom(lhs.getClass()));
     }
 
-    public static final boolean isEqual(final long lhs, final long rhs) {
-        return lhs == rhs;
+    public static interface EqualsBuilder {
+
+        <T> EqualsBuilder append(final T lhs, final T rhs);
+
+        boolean isEqual();
     }
 
-    public static final boolean isEqual(final float lhs, final float rhs) {
-        return lhs == rhs;
-    }
+    private static final class EqualsBuilderImpl implements EqualsBuilder {
 
-    public static final boolean isEqual(final double lhs, final double rhs) {
-        return lhs == rhs;
-    }
+        private boolean __isEqual = true;
 
-    public static final boolean isEqual(final boolean lhs, final boolean rhs) {
-        return lhs == rhs;
-    }
+        private EqualsBuilderImpl() {
+        }
 
-    public static final boolean isEqual(final char lhs, final char rhs) {
-        return lhs == rhs;
+        @Override
+        public <T> EqualsBuilder append(T lhs, T rhs) {
+            if (__isEqual) {
+                __isEqual = (lhs != null) && (rhs != null) && lhs.equals(rhs);
+            }
+            return this;
+        }
+
+        @Override
+        public boolean isEqual() {
+            return __isEqual;
+        }
     }
 }
