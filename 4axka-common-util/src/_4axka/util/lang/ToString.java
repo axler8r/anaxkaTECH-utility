@@ -13,17 +13,16 @@
  */
 package _4axka.util.lang;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 public final class ToString {
 
-    public ToString() {
+    private ToString() {
     }
 
     public static final ToStringBuilder toStringBuilder(final Object subject) {
@@ -36,18 +35,23 @@ public final class ToString {
 
         <C extends Collection<?>> ToStringBuilder append(final String label, final C collection);
 
+        ToStringBuilder append(final String label, final Object[] array);
+
+        <M extends Map<?, ?>> ToStringBuilder append(final String label, final M map);
+
         ToStringBuilder setUnrollDepth(final int depth);
-        
-        String prettyPrint(final String string);
 
         ToStringBuilder setPrettyPrint(final boolean pretty);
 
         ToStringBuilder setDisplayLoadLocation(final boolean display);
 
+        String prettyPrint(final String string);
+
         String string();
     }
 
     private static final class ToStringBuilderImpl implements ToStringBuilder {
+
         private static final String NAME_HASH_DELIMITER = System.getProperty(
                 "_4axka.util.lang.ToStringBuilder.NAME_HASH_DELIMITER",
                 "@");
@@ -57,6 +61,24 @@ public final class ToString {
         private static final String NAME_VALUE_SEPARATOR = System.getProperty(
                 "_4axka.util.lang.ToStringBuilder.NAME_VALUE_SEPARATOR",
                 "=");
+        private static final String MAP_NAME_VALUE_SEPARATOR = System.getProperty(
+                "_4axka.util.lang.ToStringBuilder.MAP_NAME_VALUE_SEPARATOR",
+                " => ");
+        private static final String COLLECTION_START_DELIMITER = System.getProperty(
+                "_4axka.util.lang.ToStringBuilder.COLLECTION_START_DELIMITER",
+                "[");
+        private static final String COLLECTION_STOP_DELIMITER = System.getProperty(
+                "_4axka.util.lang.ToStringBuilder.COLLECTION_STOP_DELIMITER",
+                "]");
+        private static final String OMITTED_START_DELIMITER = System.getProperty(
+                "_4axka.util.lang.ToStringBuilder.OMITTED_START_DELIMITER",
+                "... ");
+        private static final String OMITTED_STOP_DELIMITER = System.getProperty(
+                "_4axka.util.lang.ToStringBuilder.OMITTED_STOP_DELIMITER",
+                " omitted ...");
+        private static final String NULL = System.getProperty(
+                "_4axka.util.lang.ToStringBuilder.NULL",
+                "null");
         private static final String STATE_STOP_DELIMITER = System.getProperty(
                 "_4axka.util.lang.ToStringBuilder.STATE_STOP_DELIMITER",
                 "}");
@@ -64,7 +86,7 @@ public final class ToString {
                 "_4axka.util.lang.ToStringBuilder.STATE_START_DELIMITER",
                 "{");
         private static final String BYTECODE_LOCATION_LABEL = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.BYTECODE__LOCATION_LABEL",
+                "_4axka.util.lang.ToStringBuilder.BYTECODE_LOCATION_LABEL",
                 "Bytecode Location");
         private static final String INDENTATION = System.getProperty(
                 "_4axka.util.lang.ToStringBuilder.INDENTATION",
@@ -88,7 +110,7 @@ public final class ToString {
             if (label == null) {
                 throw new IllegalArgumentException();
             }
-            __state.put(label, subject == null ? "null" : subject.toString());
+            __state.put(label, subject == null ? NULL : subject.toString());
             return this;
         }
 
@@ -97,6 +119,16 @@ public final class ToString {
                 final String label,
                 final C collection) {
             return append(label, unroll(collection));
+        }
+
+        @Override
+        public ToStringBuilder append(final String label, final Object[] array) {
+            return append(label, unroll(array));
+        }
+
+        @Override
+        public <M extends Map<?, ?>> ToStringBuilder append(final String label, final M map) {
+            return append(label, unroll(map));
         }
 
         @Override
@@ -115,6 +147,49 @@ public final class ToString {
         public ToStringBuilder setDisplayLoadLocation(final boolean display) {
             __displayLoadLocation = display;
             return this;
+        }
+
+        @Override
+        public String prettyPrint(final String string) {
+            if (null == string) {
+                return NULL;
+            }
+
+            final StringBuilder builder_ = new StringBuilder();
+            final StringTokenizer tokenizer_ = new StringTokenizer(string, "{,[]}", true);
+            int indentation_ = 0;
+
+            while (tokenizer_.hasMoreElements()) {
+                final String token_ = String.class.cast(tokenizer_.nextElement()).trim();
+                switch (token_) {
+                    case "{":
+                    case "[":
+                        indentation_++;
+                        builder_
+                                .append(token_)
+                                .append(NEW_LINE);
+                        break;
+                    case "]":
+                    case "}":
+                        indentation_--;
+                        builder_
+                                .append(NEW_LINE)
+                                .append(indentation(indentation_))
+                                .append(token_);
+                        break;
+                    case ",":
+                        builder_
+                                .append(token_)
+                                .append(NEW_LINE);
+                        break;
+                    default:
+                        builder_
+                                .append(indentation(indentation_))
+                                .append(token_);
+                }
+            }
+
+            return builder_.toString();
         }
 
         @Override
@@ -164,26 +239,28 @@ public final class ToString {
         private String unroll(final Collection<?> collection, final Integer depth) {
             final StringBuilder builder_ = new StringBuilder();
             if (null != collection) {
-                builder_.append("[");
+                builder_.append(COLLECTION_START_DELIMITER);
                 int collectionIndex_ = 0;
                 final Iterator<?> items_ = collection.iterator();
                 while (items_.hasNext() && collectionIndex_++ < depth) {
                     builder_.append(wrap(items_.next()).toString());
                     if (collectionIndex_ > 0 && items_.hasNext()) {
-                        builder_.append(", ");
+                        builder_.append(NAME_VALUE_DELIMITER);
                     }
                 }
 
                 final int collectionSize_ = collection.size();
                 if (depth < collectionSize_) {
                     final int omitted_ = collectionSize_ - (depth + 1);
-                    builder_.append("... ").append(omitted_).append(" omitted ...")
-                            .append(", ")
+                    builder_.append(OMITTED_START_DELIMITER)
+                            .append(omitted_)
+                            .append(OMITTED_STOP_DELIMITER)
+                            .append(NAME_VALUE_DELIMITER)
                             .append(collection.toArray()[collectionSize_ - 1]);
                 }
-                builder_.append("]");
+                builder_.append(COLLECTION_STOP_DELIMITER);
             } else {
-                builder_.append("null");
+                builder_.append(NULL);
             }
 
             return builder_.toString();
@@ -193,59 +270,87 @@ public final class ToString {
             return unroll(collection, __unrollDepth);
         }
 
+        private String unroll(final Object[] array, final Integer depth) {
+            final StringBuilder builder_ = new StringBuilder();
+            if (null != array) {
+                builder_.append(COLLECTION_START_DELIMITER);
+                int collectionIndex_ = 0;
+                final Iterator<?> items_ = Arrays.asList(array).iterator();
+                while (items_.hasNext() && collectionIndex_++ < depth) {
+                    builder_.append(wrap(items_.next()).toString());
+                    if (collectionIndex_ > 0 && items_.hasNext()) {
+                        builder_.append(NAME_VALUE_DELIMITER);
+                    }
+                }
+
+                final int collectionSize_ = array.length;
+                if (depth < collectionSize_) {
+                    final int omitted_ = collectionSize_ - (depth + 1);
+                    builder_.append(OMITTED_START_DELIMITER)
+                            .append(omitted_)
+                            .append(OMITTED_STOP_DELIMITER)
+                            .append(NAME_VALUE_DELIMITER)
+                            .append(array[collectionSize_ - 1]);
+                }
+                builder_.append(COLLECTION_STOP_DELIMITER);
+            } else {
+                builder_.append(NULL);
+            }
+
+            return builder_.toString();
+        }
+
+        private String unroll(final Object[] array) {
+            return unroll(array, __unrollDepth);
+        }
+
+        private String unroll(final Map<?, ?> map, final Integer depth) {
+            final StringBuilder builder_ = new StringBuilder();
+            if (null != map) {
+                builder_.append(COLLECTION_START_DELIMITER);
+                int collectionIndex_ = 0;
+                final Iterator<?> items_ = map.keySet().iterator();
+                while (items_.hasNext() && collectionIndex_++ < depth) {
+                    final Object key_ = items_.next();
+                    builder_.append(wrap(key_).toString())
+                            .append(MAP_NAME_VALUE_SEPARATOR)
+                            .append(wrap(map.get(key_)).toString());
+                    if (collectionIndex_ > 0 && items_.hasNext()) {
+                        builder_.append(NAME_VALUE_DELIMITER);
+                    }
+                }
+
+                final int collectionSize_ = map.size();
+                if (depth < collectionSize_) {
+                    final int omitted_ = collectionSize_ - (depth + 1);
+                    builder_.append(OMITTED_START_DELIMITER)
+                            .append(omitted_)
+                            .append(OMITTED_STOP_DELIMITER)
+                            .append(NAME_VALUE_DELIMITER)
+                            .append(map.keySet().toArray()[collectionSize_ - 1]);
+                }
+                builder_.append(COLLECTION_STOP_DELIMITER);
+            } else {
+                builder_.append(NULL);
+            }
+
+            return builder_.toString();
+        }
+
+        private String unroll(final Map<?, ?> map) {
+            return unroll(map, __unrollDepth);
+        }
+
         private Object wrap(final Object object) {
             Object result_;
 
             if (null == object) {
-                result_ = "null";
+                result_ = NULL;
             } else {
                 result_ = object;
             }
 
             return result_;
-        }
-
-        @Override
-        public String prettyPrint(final String string) {
-            if (null == string) {
-                return "null";
-            }
-
-            final StringBuilder builder_ = new StringBuilder();
-            final StringTokenizer tokenizer_ = new StringTokenizer(string, "{,[]}", true);
-            int indentation_ = 0;
-
-            while (tokenizer_.hasMoreElements()) {
-                final String token_ = String.class.cast(tokenizer_.nextElement()).trim();
-                switch (token_) {
-                    case "{":
-                    case "[":
-                        indentation_++;
-                        builder_
-                                .append(token_)
-                                .append(NEW_LINE);
-                        break;
-                    case "]":
-                    case "}":
-                        indentation_--;
-                        builder_
-                                .append(NEW_LINE)
-                                .append(indentation(indentation_))
-                                .append(token_);
-                        break;
-                    case ",":
-                        builder_
-                                .append(token_)
-                                .append(NEW_LINE);
-                        break;
-                    default:
-                        builder_
-                                .append(indentation(indentation_))
-                                .append(token_);
-                }
-            }
-
-            return builder_.toString();
         }
 
         private String indentation(final int indentation) {
