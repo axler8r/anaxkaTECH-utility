@@ -124,12 +124,12 @@ public class ToStringTest {
     }
 
     @Test(dataProvider = "root")
-    public void dump(final Node root) {
+    public void toStringTest(final Node root) {
         System.out.println(root.toString());
     }
 
     @Test(dataProvider = "root")
-    public void prettyDump(final Node root) {
+    public void toStringPrettyPrintTest(final Node root) {
         System.out.println(toStringBuilder(this).prettyPrint(root.toString()));
     }
 
