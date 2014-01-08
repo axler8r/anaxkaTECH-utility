@@ -21,7 +21,7 @@ public class CompareTo {
     /**
      * An implementation of the <i><a href="http://goo.gl/6kIIaI">Builder Pattern</a></i>.
      */
-    public static interface CompareToBuilder {
+    public static interface CompareToBuilder extends Builder<Integer> {
 
         /**
          * Populate the {@linkplain CompareToBuilder builder}'s state space.
@@ -40,10 +40,11 @@ public class CompareTo {
          * @return A result consistent with the contract specified by {@link java.lang.Comparable}.
          * @see Comparable.
          */
-        int compare();
+        @Override
+        Integer build();
     }
 
-    private static final class CompareToBuilderImpl implements CompareToBuilder {
+    private static class CompareToBuilderImpl implements CompareToBuilder {
 
         private static final int LESS_THAN = -1;
         private static final int EQUAL = 0;
@@ -63,7 +64,7 @@ public class CompareTo {
         }
 
         @Override
-        public int compare() {
+        public Integer build() {
             return __result;
         }
 

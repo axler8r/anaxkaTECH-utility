@@ -30,7 +30,7 @@ public class ToString {
         return new ToStringBuilderImpl(subject);
     }
 
-    public static interface ToStringBuilder {
+    public static interface ToStringBuilder extends Builder<String> {
 
         <S> ToStringBuilder append(final String label, final S subject);
 
@@ -48,49 +48,50 @@ public class ToString {
 
         String prettyPrint(final String string);
 
-        String string();
+        @Override
+        String build();
     }
 
-    private static final class ToStringBuilderImpl implements ToStringBuilder {
+    private static class ToStringBuilderImpl implements ToStringBuilder {
 
         private static final String NAME_HASH_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NAME_HASH_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_HASH_DELIMITER",
                 "@");
         private static final String NAME_VALUE_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NAME_VALUE_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_VALUE_DELIMITER",
                 ", ");
         private static final String NAME_VALUE_SEPARATOR = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NAME_VALUE_SEPARATOR",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_VALUE_SEPARATOR",
                 "=");
         private static final String MAP_NAME_VALUE_SEPARATOR = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.MAP_NAME_VALUE_SEPARATOR",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.MAP_NAME_VALUE_SEPARATOR",
                 " => ");
         private static final String COLLECTION_START_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.COLLECTION_START_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.COLLECTION_START_DELIMITER",
                 "[");
         private static final String COLLECTION_STOP_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.COLLECTION_STOP_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.COLLECTION_STOP_DELIMITER",
                 "]");
         private static final String OMITTED_START_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.OMITTED_START_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.OMITTED_START_DELIMITER",
                 "... ");
         private static final String OMITTED_STOP_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.OMITTED_STOP_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.OMITTED_STOP_DELIMITER",
                 " omitted ...");
         private static final String NULL = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NULL",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NULL",
                 "null");
         private static final String STATE_STOP_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.STATE_STOP_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.STATE_STOP_DELIMITER",
                 "}");
         private static final String STATE_START_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.STATE_START_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.STATE_START_DELIMITER",
                 "{");
         private static final String BYTECODE_LOCATION_LABEL = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.BYTECODE_LOCATION_LABEL",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.BYTECODE_LOCATION_LABEL",
                 "Bytecode Location");
         private static final String INDENTATION = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.INDENTATION",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.INDENTATION",
                 "    ");
         private static final String NEW_LINE = System.lineSeparator();
         private final Object __subject;
@@ -194,7 +195,7 @@ public class ToString {
         }
 
         @Override
-        public String string() {
+        public String build() {
             final StringBuilder result_ = new StringBuilder();
 
             result_

@@ -133,7 +133,7 @@ public class ToStringTest {
         System.out.println(toStringBuilder(this).prettyPrint(root.toString()));
     }
 
-    private static final class Node {
+    private static class Node {
 
         private final Map<String, Object> __properties;
         private final List<Node> __containees;
@@ -176,11 +176,11 @@ public class ToStringTest {
                     .append("Containees", getContainees())
                     .append("Terminals", getTerminals())
                     .append("super", super.toString())
-                    .string();
+                    .build();
         }
     }
 
-    private static final class Terminal {
+    private static class Terminal {
 
         private final BigDecimal __bigDecimal;
         private final BigInteger __bigInteger;
@@ -246,7 +246,7 @@ public class ToStringTest {
                     .append("Array", getArray())
                     .append("List", getList())
                     .append("super", super.toString())
-                    .string();
+                    .build();
         }
     }
 }

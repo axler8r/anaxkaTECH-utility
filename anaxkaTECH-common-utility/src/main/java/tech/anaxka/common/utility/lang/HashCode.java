@@ -1,19 +1,22 @@
 package tech.anaxka.common.utility.lang;
 
+import tech.anaxka.common.utility.functor.Builder;
+
 public class HashCode {
 
     public static HashCodeBuilder hashCodeBuilder() {
         return new HashCodeBuilderImpl();
     }
 
-    public static interface HashCodeBuilder {
+    public static interface HashCodeBuilder extends Builder<Integer> {
 
         <S> HashCodeBuilder append(S subject);
 
-        int hash();
+        @Override
+        Integer build();
     }
 
-    private static final class HashCodeBuilderImpl implements HashCodeBuilder {
+    private static class HashCodeBuilderImpl implements HashCodeBuilder {
 
         private static final int PRIME = 31;
         private int __result = 0;
@@ -28,7 +31,7 @@ public class HashCode {
         }
 
         @Override
-        public int hash() {
+        public Integer build() {
             return __result;
         }
     }

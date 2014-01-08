@@ -26,14 +26,15 @@ public class Equals {
                 || (lhs != null && rhs != null && rhs.getClass().isAssignableFrom(lhs.getClass()));
     }
 
-    public static interface EqualsBuilder {
+    public static interface EqualsBuilder extends Builder<Boolean> {
 
         <T> EqualsBuilder append(final T lhs, final T rhs);
 
-        boolean isEqual();
+        @Override
+        Boolean build();
     }
 
-    private static final class EqualsBuilderImpl implements EqualsBuilder {
+    private static class EqualsBuilderImpl implements EqualsBuilder {
 
         private boolean __isEqual = true;
 
@@ -49,7 +50,7 @@ public class Equals {
         }
 
         @Override
-        public boolean isEqual() {
+        public Boolean build() {
             return __isEqual;
         }
     }
