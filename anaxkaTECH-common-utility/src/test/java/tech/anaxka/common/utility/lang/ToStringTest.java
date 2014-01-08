@@ -13,12 +13,10 @@
  */
 package tech.anaxka.common.utility.lang;
 
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
-
-import java.util.Date;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +24,8 @@ import java.util.Map;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
 public class ToStringTest {
 

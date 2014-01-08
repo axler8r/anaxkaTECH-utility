@@ -1,5 +1,7 @@
 package tech.anaxka.common.utility.lang;
 
+import tech.anaxka.common.utility.functor.Builder;
+
 /**
  * Facilitates implementation of {@link Comparable}.
  *

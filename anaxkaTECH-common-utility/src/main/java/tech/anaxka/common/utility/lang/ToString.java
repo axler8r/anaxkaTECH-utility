@@ -19,8 +19,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+import tech.anaxka.common.utility.functor.Builder;
 
-public final class ToString {
+public class ToString {
 
     private ToString() {
     }

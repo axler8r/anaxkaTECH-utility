@@ -1,5 +1,7 @@
 package tech.anaxka.common.utility.lang;
 
+import tech.anaxka.common.utility.functor.Builder;
+
 public class Equals {
 
     public static final <T> boolean isEquatable(final T lhs, final T rhs) {
