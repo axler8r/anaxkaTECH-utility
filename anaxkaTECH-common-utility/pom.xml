@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.anaxka</groupId>
     <artifactId>anaxkaTECH-common-utility</artifactId>
-    <version>0.07.000.0000-SNAPSHOT</version>
+    <version>0.08.000.0000-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>anaxkaTECH-common-utility</name>
     <url>http://maven.apache.org</url>
@@ -17,7 +17,21 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.1</version>
             </plugin>
         </plugins>
     </build>
