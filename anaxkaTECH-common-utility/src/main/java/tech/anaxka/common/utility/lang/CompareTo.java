@@ -1,5 +1,6 @@
 package tech.anaxka.common.utility.lang;
 
+import java.util.Map;
 import tech.anaxka.common.utility.functor.Builder;
 
 /**
@@ -34,9 +35,41 @@ public class CompareTo {
          */
         <T extends Comparable<T>> CompareToBuilder append(final T lhs, final T rhs);
 
+        // compare Iterables
+        // RULES:
+        // a and b are Iterables<Compareable<T>>
+        // a == b
+        //     if a.length == b.length &&
+        //     foreach (ea, eb : a, b) ea.compareTo(eb) == 0
+        // a > b
+        //     if a.length > b.length &&
+        //     foreach (ea, eb : a, b) ea.compareTo(eb) == 0 unti b.length is reached
+        // a < b
+        //     if a.length < b.length &&
+        //     foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until a.lenght is reached
+        // a > b
+        //     when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) > 0
+        // a < b
+        //     when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) < 0
+        // a > b
+        //     if a != null && b == null
+        // a < b
+        //     if a == null && b != null
+        <S extends Comparable<S>, T extends Iterable<S>> CompareToBuilder append(
+                final T lhs,
+                final T rhs);
+
+        // compare Maps
+        <S extends Comparable<S>, T extends Comparable<T>, M extends Map<S, T>> CompareToBuilder append(
+                final M lhs,
+                final M rhs);
+
+        // compare Arrays
+        <T extends Comparable<T>> CompareToBuilder append(final T[] lhs, final T[] rhs);
+
         /**
          * Determines if one {@code object} is less than, equal to or greater than another.
-         * 
+         *
          * @return A result consistent with the contract specified by {@link java.lang.Comparable}.
          * @see Comparable.
          */
@@ -60,6 +93,22 @@ public class CompareTo {
             if (__result == EQUAL) {
                 __result = compare(lhs, rhs);
             }
+
+            return this;
+        }
+
+        @Override
+        public <S extends Comparable<S>, T extends Iterable<S>> CompareToBuilder append(T lhs, T rhs) {
+            return this;
+        }
+
+        @Override
+        public <S extends Comparable<S>, T extends Comparable<T>, M extends Map<S, T>> CompareToBuilder append(M lhs, M rhs) {
+            return this;
+        }
+
+        @Override
+        public <T extends Comparable<T>> CompareToBuilder append(T[] lhs, T[] rhs) {
             return this;
         }
 
