@@ -1,5 +1,7 @@
 package tech.anaxka.common.utility.lang;
 
+import java.lang.reflect.Array;
+import java.util.Collection;
 import java.util.Map;
 import tech.anaxka.common.utility.functor.Builder;
 
@@ -35,41 +37,126 @@ public class CompareTo {
          */
         <T extends Comparable<T>> CompareToBuilder append(final T lhs, final T rhs);
 
-        // compare Iterables
-        // RULES:
-        // a and b are Iterables<Compareable<T>>
-        // a == b
-        //     if a.length == b.length &&
-        //     foreach (ea, eb : a, b) ea.compareTo(eb) == 0
-        // a > b
-        //     if a.length > b.length &&
-        //     foreach (ea, eb : a, b) ea.compareTo(eb) == 0 unti b.length is reached
-        // a < b
-        //     if a.length < b.length &&
-        //     foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until a.lenght is reached
-        // a > b
-        //     when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) > 0
-        // a < b
-        //     when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) < 0
-        // a > b
-        //     if a != null && b == null
-        // a < b
-        //     if a == null && b != null
-        <S extends Comparable<S>, T extends Iterable<S>> CompareToBuilder append(
-                final T lhs,
-                final T rhs);
+        /**
+         * Compare {@link Iterable}s.
+         * <p/>
+         * <b>RULES:</b><br/>
+         * <i> Let a : Iterable&lt;Comparable&lt;T&gt;&gt;,
+         * b : Iterable&lt;Comparable&lt;? super T&gt;&gt;</i>
+         * <ul>
+         * <li/>a == b
+         *       a.length == b.length &amp;&amp;<br/>
+         *       foreach (ea, eb : a, b) ea.compareTo(eb) == 0
+         * <li/>a &GT; b
+         *       a.length &GT; b.length &amp;&amp;<br/>
+         *       foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until (a.length &GT; b.length) == true
+         * <li/>a &GT; b
+         *       when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &GT; 0
+         * <li/>a &GT; b
+         *       a != null && b == null
+         * <li/>a &LT; b<br/>
+         *       a.length &LT; b.length &amp;&amp;<br/>
+         *       foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until (a.lenght &LT; b.length) == true
+         * <li/>a &LT; b
+         *       when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &LT; 0
+         * <li/>a &LT; b
+         *       a == null && b != null
+         * </ul>
+         * <p/>
+         * @param <T>
+         * @param lhs
+         * @param rhs
+         * @return
+         */
+        <T extends Comparable<T>> CompareToBuilder append(
+                final Collection<T> lhs,
+                final Collection<? super T> rhs);
 
-        // compare Maps
-        <S extends Comparable<S>, T extends Comparable<T>, M extends Map<S, T>> CompareToBuilder append(
-                final M lhs,
-                final M rhs);
+        // TODO: define an append that takes two Iterables and a Comparator to enforce ordering...
+        // <T extends Comparable<T>> CompareToBuilder append(
+        //        final Iterable<T> lhs,
+        //        final Iterable<? super T> rhs,
+        //        final Comparator<? super T> c);
 
-        // compare Arrays
+        /**
+         * Compare {@link Array}s.
+         * <p/>
+         * <code>
+         * RULES:<br/>
+         *   a : T[]<br/>
+         *   b : T[]<br/>
+         *   a == b<br/>
+         *       a.length == b.length &&<br/>
+         *       foreach (ea, eb : a, b) ea.compareTo(eb) == 0<br/>
+         *   a &GT; b<br/>
+         *       a.length &GT; b.length &amp;&amp;<br/>
+         *       foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until (a.length &GT; b.length) == true<br/>
+         *   a &LT; b<br/>
+         *       a.length < b.length &amp;&amp;<br/>
+         *       foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until (a.lenght &LT; b.length) == true<br/>
+         *   a &GT; b<br/>
+         *       when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &GT; 0<br/>
+         *   a &LT; b<br/>
+         *       when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &LT; 0<br/>
+         *   a &GT; b<br/>
+         *       a != null && b == null<br/>
+         *   a &LT; b<br/>
+         *       a == null && b != null<br/>
+         * </code>
+         * <p/>
+         * @param <T>
+         * @param lhs
+         * @param rhs
+         * @return
+         */
         <T extends Comparable<T>> CompareToBuilder append(final T[] lhs, final T[] rhs);
 
         /**
+         * Compare {@link Map}s.
+         * <p/>
+         * <code>
+         * RULES:<br/>
+         *   a and b are Map<K extends Comparable<K>, V extends Comparable <V>><br/>
+         *   a == b<br/>
+         *       a.keySet.length == b.keySet.length &amp;&amp;<br/>
+         *       foreach (ka, kb: a.keySet, b.keySet) a.value(ka).compareTo(b.value(kb)) == 0<br/>
+         *   a &GT; b<br/>
+         *       a.keySet.length &GT; b.keySet.length &amp;&amp;<br/>
+         *       foreach (ka, kb : a, b) a.value(ka).compareTo(b.value(kb)) == 0<br/>
+         *           until (a.length &GT; b.length) == true<br/>
+         *   a &LT; b<br/>
+         *       a.keySet.length &LT; b.keySet.length &amp;&amp;<br/>
+         *       foreach (ka, kb : a, b) a.value(ka).compareTo(b.value(kb)) == 0<br/>
+         *           until (a.length &LT; b.length) == true<br/>
+         *   a &GT; b<br/>
+         *       when first a.value(ka).compareTo(b.value(kb)) &GT; 0<br/>
+         *           in foreach (ka, kb : a.keySet, b.keySet)<br/>
+         *   a &LT; b<br/>
+         *       when first a.value(ka).compareTo(b.value(kb)) &LT; 0<br/>
+         *           in foreach (ka, kb : a.keySet, b.keySet)<br/>
+         *   a &GT; b<br/>
+         *       when first ka.compareTo(kb) &GT; 0 in foreach (ka, kb : a, b)<br/>
+         *   a &LT; b<br/>
+         *       when first ka.compareTo(kb) &LT; 0 in foreach (ka, kb : a, b)<br/>
+         *   a &GT; b<br/>
+         *       a != null &amp;&amp; b == null<br/>
+         *   a &LT; b<br/>
+         *       a == null &amp;&amp; b != null<br/>
+         * </code>
+         * <p/>
+         * @param <K>
+         * @param <V>
+         * @param lhs
+         * @param rhs
+         * @return
+         */
+        <K extends Comparable<K>, V extends Comparable<V>> CompareToBuilder append(
+                final Map<K, V> lhs,
+                final Map<K, V> rhs);
+
+        /**
          * Determines if one {@code object} is less than, equal to or greater than another.
-         *
+         * <p/>
          * @return A result consistent with the contract specified by {@link java.lang.Comparable}.
          * @see Comparable.
          */
@@ -98,12 +185,28 @@ public class CompareTo {
         }
 
         @Override
-        public <S extends Comparable<S>, T extends Iterable<S>> CompareToBuilder append(T lhs, T rhs) {
+        public <T extends Comparable<T>> CompareToBuilder append(
+                final Collection<T> lhs,
+                final Collection<? super T> rhs) {
+            if (lhs != null && rhs != null) {
+                
+            } else if (lhs == null && rhs != null) {
+                
+            } else if (lhs.size() == rhs.size()) {
+                
+            } else if (lhs.size() < rhs.size()) {
+                
+            } else {
+                
+            }
+
             return this;
         }
 
         @Override
-        public <S extends Comparable<S>, T extends Comparable<T>, M extends Map<S, T>> CompareToBuilder append(M lhs, M rhs) {
+        public <K extends Comparable<K>, V extends Comparable<V>> CompareToBuilder append(
+                final Map<K, V> lhs,
+                final Map<K, V> rhs) {
             return this;
         }
 
