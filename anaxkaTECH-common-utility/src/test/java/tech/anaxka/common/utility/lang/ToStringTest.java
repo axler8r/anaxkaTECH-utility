@@ -123,12 +123,12 @@ public class ToStringTest {
         return new Object[][]{{root_}};
     }
 
-    @Test(dataProvider = "root")
+    @Test(dataProvider = "root", enabled = false)
     public void toStringTest(final Node root) {
         System.out.println(root.toString());
     }
 
-    @Test(dataProvider = "root")
+    @Test(dataProvider = "root", enabled = false)
     public void toStringPrettyPrintTest(final Node root) {
         System.out.println(toStringBuilder(this).prettyPrint(root.toString()));
     }
