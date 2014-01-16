@@ -13,6 +13,11 @@ import tech.anaxka.common.utility.functor.Builder;
  * @author Axl Mattheus
  */
 public class CompareTo {
+    public static final int LESS_THAN = -1;
+    public static final int EQUAL = 0;
+    public static final int GREATER_THAN = 1;
+
+    private CompareTo() {}
 
     /**
      * Constructs an implementation of {@link CompareToBuilder}.
@@ -23,48 +28,61 @@ public class CompareTo {
         return new CompareToBuilderImpl();
     }
 
+    public static <T> boolean isComparable(final T that) {
+        return that != null;
+    }
+
     /**
      * An implementation of the <i><a href="http://goo.gl/6kIIaI">Builder Pattern</a></i>.
      */
     public static interface CompareToBuilder extends Builder<Integer> {
 
         /**
-         * Populate the {@linkplain CompareToBuilder builder}'s state space.
-         * <p>
+         * Populate the {@linkplain CompareToBuilder builder}'s state space to compare
+         * {@linkplain Comparable comparable}s.
+         * <p/>
          * @param <T> type parameter.
          * @param lhs the left hand side of the &quot;compare to expression&quot;.
          * @param rhs the right hand side of the &quot;compare to expression&quot;.
-         * <p>
+         * <p/>
          * @return An instance of {@code this} to continue constructing the builder.
-         * <p>
+         * <p/>
          * @see Comparable#compareTo(java.lang.Object).
          */
         <T extends Comparable<T>> CompareToBuilder append(final T lhs, final T rhs);
 
         /**
-         * Compare {@link Iterable}s.
+         * Populate the {@linkplain CompareToBuilder builder}'s state space to compare
+         * {@linkplain Collection collection}s.
          * <p/>
-         * <b>RULES:</b><br/>
-         * <i> Let a : Iterable&lt;Comparable&lt;T&gt;&gt;, b :
-         * Iterable&lt;Comparable&lt;T&gt;&gt;</i>
-         * <ul>
-         * <li/>a == b a.length == b.length &amp;&amp;<br/>
-         * foreach (ea, eb : a, b) ea.compareTo(eb) == 0
-         * <li/>a &GT; b a.length &GT; b.length &amp;&amp;<br/>
-         * foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until (a.length &GT; b.length) == true
-         * <li/>a &GT; b when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &GT; 0
-         * <li/>a &GT; b a != null && b == null
-         * <li/>a &LT; b<br/>
-         * a.length &LT; b.length &amp;&amp;<br/>
-         * foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until (a.lenght &LT; b.length) == true
-         * <li/>a &LT; b when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &LT; 0
-         * <li/>a &LT; b a == null && b != null
-         * </ul>
+         * <b>Rules</b><br/>
+         * <i>Pre-condition &mdash; Collections are iterated in step and in the same order.</i><br/>
+         * <i>Pre-condition &mdash; Elements must implement {@link Comparable}.</i><br/>
+         * <i>Pre-condition &mdash; Elements of both collections must have the same type.</i>
+         * <ol>
+         * <li/>Two collections are equal if all elements, are equal and the collections have equal
+         * length.
+         * <li/>A collection is greater than another as soon as an element in the first collection
+         * is greater than the corresponding element in the second.
+         * <li/>A collection is less than another as soon as an element in the first collection is
+         * less than the corresponding element in the second.
+         * <li/>A collection is greater than another if the first one is not null and the second one
+         * is null.
+         * <li/>A collection is less than another if the first one is null and the second one is not
+         * null.
+         * <li/>A collection is greater than another if the first one is not empty and the second
+         * one is empty.
+         * <li/>A collection is less than another if the first one is empty and the second one is
+         * not empty.
+         * </ol>
          * <p/>
-         * @param <T>
-         * @param lhs
-         * @param rhs <p>
-         * @return
+         * @param <T> Type parameter.
+         * @param lhs Source {@linkplain Collection collection}.
+         * @param rhs Target {@linkplain Collection collection}.
+         * <p/>
+         * @return 0 if
+         * <p/>
+         * @see Comparable#compareTo(java.lang.Object).
          */
         <T extends Comparable<T>> CompareToBuilder append(
                 final Collection<T> lhs,
@@ -76,75 +94,25 @@ public class CompareTo {
         //        final Iterable<T> rhs,
         //        final Comparator<T> c);
         /**
-         * Compare {@link Array}s.
-         * <p/>
-         * <code>
-         * RULES:<br/>
-         * a : T[]<br/>
-         * b : T[]<br/>
-         * a == b<br/>
-         * a.length == b.length &&<br/>
-         * foreach (ea, eb : a, b) ea.compareTo(eb) == 0<br/>
-         * a &GT; b<br/>
-         * a.length &GT; b.length &amp;&amp;<br/>
-         * foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until (a.length &GT; b.length) == true<br/>
-         * a &LT; b<br/>
-         * a.length < b.length &amp;&amp;<br/> foreach (ea, eb : a, b) ea.compareTo(eb) == 0 until
-         * (a.lenght &LT; b.length) == true<br/>
-         * a &GT; b<br/>
-         * when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &GT; 0<br/>
-         * a &LT; b<br/>
-         * when first ea in foreach (ea, eb : a, b) ea.compareTo(eb) &LT; 0<br/>
-         * a &GT; b<br/>
-         * a != null && b == null<br/>
-         * a &LT; b<br/>
-         * a == null && b != null<br/>
-         * </code>
+         * Populate the {@linkplain CompareToBuilder builder}'s state space to compare
+         * {@link Array}s.
          * <p/>
          * @param <T>
          * @param lhs
-         * @param rhs <p>
-         * @return
+         * @param rhs <p/>
+         * @return <p/>
+         * @see #append(java.util.Collection, java.util.Collection)
          */
         <T extends Comparable<T>> CompareToBuilder append(final T[] lhs, final T[] rhs);
 
         /**
-         * Compare {@link Map}s.
-         * <p/>
-         * <code>
-         * RULES:<br/>
-         * a and b are Map<K extends Comparable<K>, V extends Comparable <V>><br/>
-         * a == b<br/>
-         * a.keySet.length == b.keySet.length &amp;&amp;<br/>
-         * foreach (ka, kb: a.keySet, b.keySet) a.value(ka).compareTo(b.value(kb)) == 0<br/>
-         * a &GT; b<br/>
-         * a.keySet.length &GT; b.keySet.length &amp;&amp;<br/>
-         * foreach (ka, kb : a, b) a.value(ka).compareTo(b.value(kb)) == 0<br/>
-         * until (a.length &GT; b.length) == true<br/>
-         * a &LT; b<br/>
-         * a.keySet.length &LT; b.keySet.length &amp;&amp;<br/>
-         * foreach (ka, kb : a, b) a.value(ka).compareTo(b.value(kb)) == 0<br/>
-         * until (a.length &LT; b.length) == true<br/>
-         * a &GT; b<br/>
-         * when first a.value(ka).compareTo(b.value(kb)) &GT; 0<br/>
-         * in foreach (ka, kb : a.keySet, b.keySet)<br/>
-         * a &LT; b<br/>
-         * when first a.value(ka).compareTo(b.value(kb)) &LT; 0<br/>
-         * in foreach (ka, kb : a.keySet, b.keySet)<br/>
-         * a &GT; b<br/>
-         * when first ka.compareTo(kb) &GT; 0 in foreach (ka, kb : a, b)<br/>
-         * a &LT; b<br/>
-         * when first ka.compareTo(kb) &LT; 0 in foreach (ka, kb : a, b)<br/>
-         * a &GT; b<br/>
-         * a != null &amp;&amp; b == null<br/>
-         * a &LT; b<br/>
-         * a == null &amp;&amp; b != null<br/>
-         * </code>
+         * Populate the {@linkplain CompareToBuilder builder}'s state space to compare
+         * {@linkplain Map map}s.
          * <p/>
          * @param <K>
          * @param <V>
          * @param lhs
-         * @param rhs <p>
+         * @param rhs <p/>
          * @return
          */
         <K extends Comparable<K>, V extends Comparable<V>> CompareToBuilder append(
@@ -163,10 +131,6 @@ public class CompareTo {
     }
 
     private static class CompareToBuilderImpl implements CompareToBuilder {
-
-        private static final int LESS_THAN = -1;
-        private static final int EQUAL = 0;
-        private static final int GREATER_THAN = 1;
         private int __result = EQUAL;
 
         private CompareToBuilderImpl() {
@@ -237,7 +201,7 @@ public class CompareTo {
                     __result = compareDifferentSizeMaps(lhs, rhs);
                 }
             }
-            
+
             return this;
         }
 
