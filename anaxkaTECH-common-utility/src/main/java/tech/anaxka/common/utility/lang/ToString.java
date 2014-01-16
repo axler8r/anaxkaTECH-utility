@@ -23,8 +23,7 @@ import tech.anaxka.common.utility.functor.Builder;
 
 public class ToString {
 
-    private ToString() {
-    }
+    private ToString() {}
 
     public static final ToStringBuilder toStringBuilder(final Object subject) {
         return new ToStringBuilderImpl(subject);
