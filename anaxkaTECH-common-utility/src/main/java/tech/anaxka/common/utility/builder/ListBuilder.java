@@ -54,6 +54,7 @@ public class ListBuilder<T> implements Builder<List<T>> {
     public static final <T> ListBuilder listBuilder(final List<T> list) {
         return new ListBuilder(list);
     }
+
     public ListBuilder append(final T element) {
         __.add(element);
         return this;
@@ -63,5 +64,4 @@ public class ListBuilder<T> implements Builder<List<T>> {
     public List<T> build() {
         return __;
     }
-    
 }
