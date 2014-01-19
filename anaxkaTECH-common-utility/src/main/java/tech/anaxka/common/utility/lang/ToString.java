@@ -384,18 +384,18 @@ public class ToString {
             return unroll(array, __unrollDepth);
         }
 
-        private String unroll(final Map<?, ?> map, final Integer depth) {
+        private <K, V> String unroll(final Map<K, V> map, final Integer depth) {
             final StringBuilder builder_ = new StringBuilder();
             if (null != map) {
                 builder_.append(COLLECTION_START_DELIMITER);
                 int collectionIndex_ = 0;
-                final Iterator<?> items_ = map.keySet().iterator();
-                while (items_.hasNext() && collectionIndex_++ < depth) {
-                    final Object key_ = items_.next();
-                    builder_.append(wrap(key_).toString())
+                final Iterator<Map.Entry<K, V>> entries_ = map.entrySet().iterator();
+                while (entries_.hasNext() && collectionIndex_++ < depth) {
+                    Map.Entry<K, V> entry_ = entries_.next();
+                    builder_.append(wrap(entry_.getKey()).toString())
                             .append(MAP_NAME_VALUE_SEPARATOR)
-                            .append(wrap(map.get(key_)).toString());
-                    if (collectionIndex_ > 0 && items_.hasNext()) {
+                            .append(wrap(entry_.getValue()).toString());
+                    if (collectionIndex_ > 0 && entries_.hasNext()) {
                         builder_.append(NAME_VALUE_DELIMITER);
                     }
                 }

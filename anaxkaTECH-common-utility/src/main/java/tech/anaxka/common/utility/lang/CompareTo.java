@@ -303,14 +303,14 @@ public class CompareTo {
                 final Map<K, V> rhs) {
             int result_ = EQUAL;
 
-            final Iterator<K> lhski_ = lhs.keySet().iterator();
-            final Iterator<K> rhski_ = rhs.keySet().iterator();
+            final Iterator<Map.Entry<K, V>> lhski_ = lhs.entrySet().iterator();
+            final Iterator<Map.Entry<K, V>> rhski_ = rhs.entrySet().iterator();
             while (lhski_.hasNext() && result_ == EQUAL) {
-                final K lhsk_ = lhski_.next();
-                final K rhsk_ = rhski_.next();
-                result_ = compare(lhsk_, rhsk_);
+                final Map.Entry<K, V> lhse_ = lhski_.next();
+                final Map.Entry<K, V> rhse_ = rhski_.next();
+                result_ = compare(lhse_.getKey(), rhse_.getKey());
                 if (result_ == EQUAL) {
-                    result_ = compare(lhs.get(lhsk_), rhs.get(rhsk_));
+                    result_ = compare(lhse_.getValue(), rhse_.getValue());
                 }
             }
 
@@ -322,21 +322,21 @@ public class CompareTo {
                 final Map<K, V> rhs) {
             int result_ = EQUAL;
 
-            Iterator<K> ski_;
-            Iterator<K> lki_;
+            Iterator<Map.Entry<K, V>> sesi_;
+            Iterator<Map.Entry<K, V>> lesi_;
             if (lhs.size() < rhs.size()) {
-                ski_ = lhs.keySet().iterator();
-                lki_ = rhs.keySet().iterator();
+                sesi_ = lhs.entrySet().iterator();
+                lesi_ = rhs.entrySet().iterator();
             } else {
-                ski_ = rhs.keySet().iterator();
-                lki_ = lhs.keySet().iterator();
+                sesi_ = rhs.entrySet().iterator();
+                lesi_ = lhs.entrySet().iterator();
             }
-            while (ski_.hasNext() && result_ == EQUAL) {
-                final K lhsk_ = ski_.next();
-                final K rhsk_ = lki_.next();
-                result_ = compare(lhsk_, rhsk_);
+            while (sesi_.hasNext() && result_ == EQUAL) {
+                final Map.Entry<K, V> lhse_ = sesi_.next();
+                final Map.Entry<K, V> rhse_ = lesi_.next();
+                result_ = compare(lhse_.getKey(), rhse_.getKey());
                 if (result_ == EQUAL) {
-                    result_ = compare(lhs.get(lhsk_), rhs.get(rhsk_));
+                    result_ = compare(lhse_.getValue(), rhse_.getValue());
                 }
             }
 
