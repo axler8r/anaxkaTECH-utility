@@ -254,9 +254,9 @@ public class CompareToTest {
         assertTrue(true);
     }
 
-    @Test
-    public void testNullComparison() {
-        assertTrue(true);
+    @Test(dataProvider = "reflexiveTestData")
+    public void testNullComparison(final TestData data) {
+        assertTrue(data.compareTo(null) > 0);
     }
 
     public abstract static class TestData implements Comparable<TestData> {
