@@ -33,6 +33,8 @@ package tech.anaxka.common.utility.exception;
  * @author Axl Mattheus
  */
 public class RecoverableException extends RuntimeException {
+    private static final long serialVersionUID = -4517820234943773433L;
+
     /**
      *
      */

@@ -33,6 +33,8 @@ package tech.anaxka.common.utility.exception;
  * @author Axl Mattheus
  */
 public class FatalException extends Exception {
+    private static final long serialVersionUID = -7494141881121987469L;
+
     /**
      * <p>Constructor for FatalException.</p>
      */

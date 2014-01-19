@@ -33,6 +33,8 @@ package tech.anaxka.common.utility.data.exception;
  * @author Axl Mattheus
  */
 public class DataModificationException extends Exception {
+    private static final long serialVersionUID = -2822969952385376751L;
+
     /**
      * <p>Constructor for DataModificationException.</p>
      */

@@ -33,6 +33,8 @@ package tech.anaxka.common.utility.data.exception;
  * @author Axl Mattheus
  */
 public class DataRemovalException extends Exception {
+    private static final long serialVersionUID = 1189132013822008561L;
+
     /**
      *
      */

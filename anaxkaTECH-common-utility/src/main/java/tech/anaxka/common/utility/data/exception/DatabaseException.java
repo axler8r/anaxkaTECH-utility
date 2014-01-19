@@ -33,6 +33,8 @@ package tech.anaxka.common.utility.data.exception;
  * @author Axl Mattheus
  */
 public class DatabaseException extends Exception {
+    private static final long serialVersionUID = 1414063319978461778L;
+
     /**
      * <p>Constructor for DatabaseException.</p>
      */
