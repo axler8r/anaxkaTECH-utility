@@ -23,10 +23,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 package tech.anaxka.common.utility.builder;
 
-import java.util.List;
+import java.util.Set;
 import tech.anaxka.common.utility.functor.Builder;
 
 /**
@@ -34,34 +33,28 @@ import tech.anaxka.common.utility.functor.Builder;
  * @author Adolf.Mattheus
  * @param <T>
  */
-public class ListBuilder<T> implements Builder<List<T>> {
-    private final List<T> __;
-    
-    private ListBuilder(final List<T> list) {
-        if (list == null) {
+public class SetBuilder<T> implements Builder<Set<T>> {
+
+    private final Set<T> __;
+
+    private SetBuilder(final Set<T> set) {
+        if (set == null) {
             throw new IllegalArgumentException();
         }
-
-        __ = list;
-    }
-    
-    /**
-     *
-     * @param <T>
-     * @param list
-     * @return
-     */
-    public static final <T> ListBuilder listBuilder(final List<T> list) {
-        return new ListBuilder(list);
+        __ = set;
     }
 
-    public ListBuilder append(final T element) {
+    public static final <T> SetBuilder<T> setBuilder(final Set<T> set) {
+        return new SetBuilder<>(set);
+    }
+
+    public final SetBuilder append(final T element) {
         __.add(element);
         return this;
     }
 
     @Override
-    public List<T> build() {
+    public Set<T> build() {
         return __;
     }
 }

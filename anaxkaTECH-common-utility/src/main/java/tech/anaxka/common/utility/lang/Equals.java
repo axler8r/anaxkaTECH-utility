@@ -3,6 +3,7 @@ package tech.anaxka.common.utility.lang;
 import tech.anaxka.common.utility.functor.Builder;
 
 public class Equals {
+    private Equals() {}
 
     public static final <T> boolean isEquatable(final T lhs, final T rhs) {
         return !isSameObject(lhs, rhs) && !isNull(rhs) && isAssignmentCompatible(lhs, rhs);

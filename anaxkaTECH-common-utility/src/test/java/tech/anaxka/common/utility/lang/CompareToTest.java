@@ -39,7 +39,10 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertTrue;
 import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
 import static tech.anaxka.common.utility.builder.MapBuilder.mapBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
+import static tech.anaxka.common.utility.lang.CompareTo.GREATER_THAN;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
 
 /**
  *
@@ -56,91 +59,91 @@ public class CompareToTest {
 
         final TestData reflexiveOldSchoolTestData_ = new OldSchoolCompareToTestData(
                 mapBuilder(new HashMap<String, Date>())
-                        .append("Yesterday",
-                                dateTimeBuilder()
-                                        .setCurrentDateTime(new Date())
-                                        .addDay(-1)
-                                        .build())
-                        .build(),
+                .append("Yesterday",
+                        dateTimeBuilder()
+                        .setCurrentDateTime(new Date())
+                        .addDay(-1)
+                        .build())
+                .build(),
                 dateTimeBuilder()
-                        .build(),
+                .build(),
                 new BigDecimal("258963147.369852147"),
-                new UserComparable[] {
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable()
+                new UserComparable[]{
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable()
                 },
                 mapBuilder(new HashMap<Integer, OldSchoolUserComparable>())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .build(),
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .build(),
                 UUID.randomUUID().toString(),
                 random_.nextInt(),
                 random_.nextFloat());
 
         final TestData reflexiveHipTestData_ = new HipCompareToTestData(
                 mapBuilder(new HashMap<String, Date>())
-                        .append(
-                                "Yesterday",
-                                dateTimeBuilder()
-                                .setCurrentDateTime(new Date())
-                                .addDay(-1)
-                                .build())
-                        .build(),
+                .append(
+                        "Yesterday",
+                        dateTimeBuilder()
+                        .setCurrentDateTime(new Date())
+                        .addDay(-1)
+                        .build())
+                .build(),
                 dateTimeBuilder()
-                        .build(),
+                .build(),
                 new BigDecimal("258963147.369852147"),
-                new UserComparable[] {
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable(),
-                        new OldSchoolUserComparable()
+                new UserComparable[]{
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable(),
+                    new OldSchoolUserComparable()
                 },
                 mapBuilder(new HashMap<Integer, OldSchoolUserComparable>())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .append(random_.nextInt(), new OldSchoolUserComparable())
-                        .build(),
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .build(),
                 UUID.randomUUID().toString(),
                 random_.nextInt(),
                 random_.nextFloat());
-        
-        return new Object[][] {
+
+        return new Object[][]{
             {reflexiveOldSchoolTestData_},
             {reflexiveHipTestData_}
         };
     }
 
     /**
-     * 
+     *
      * @param data
      */
     @Test(dataProvider = "reflexiveTestData")
@@ -158,7 +161,7 @@ public class CompareToTest {
         final int INT = random_.nextInt();
         final float FLOAT = random_.nextFloat();
         final BigDecimal BIG_DECIMAL = new BigDecimal("258963147.369852147456987123");
-        final UserComparable[] USER_COMPARABLE_ARRAY = new UserComparable[] {
+        final UserComparable[] USER_COMPARABLE_ARRAY = new UserComparable[]{
             new OldSchoolUserComparable(),
             new OldSchoolUserComparable(),
             new OldSchoolUserComparable(),
@@ -227,15 +230,15 @@ public class CompareToTest {
                 STRING,
                 INT,
                 FLOAT);
-        
-        return new Object[][] {
+
+        return new Object[][]{
             {sostd0_, sostd1_},
             {shtd0_, shtd1_}
         };
     }
 
     /**
-     * 
+     *
      * @param lhs
      * @param rhs
      */
@@ -244,14 +247,92 @@ public class CompareToTest {
         assertTrue(lhs.compareTo(rhs) == rhs.compareTo(lhs));
     }
 
-    @Test
-    public void testTransitivity() {
-        assertTrue(true);
+    @DataProvider
+    Object[][] transitiveTestData() {
+        final Random random_ = new Random();
+        final Date NOW = dateTimeBuilder().build();
+        final Date YESTERDAY = dateTimeBuilder().setCurrentDateTime(NOW).addDay(-1).build();
+        final Date TOMORROW = dateTimeBuilder().setCurrentDateTime(NOW).addDay(+1).build();
+        final String STRING = UUID.randomUUID().toString();
+        final int INT = random_.nextInt();
+        final float FLOAT = random_.nextFloat();
+        final BigDecimal BIG_DECIMAL = new BigDecimal("258963147.369852147456987123");
+        final UserComparable[] USER_COMPARABLE_ARRAY = new UserComparable[]{
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable(),
+            new OldSchoolUserComparable()
+        };
+        final Map INT_USER_COMPARABLE_MAP = mapBuilder(new HashMap<Integer, OldSchoolUserComparable>())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .append(random_.nextInt(), new OldSchoolUserComparable())
+                .build();
+        final Map STRING_DATE_MAP = mapBuilder(new HashMap<String, Date>())
+                .append("Yesterday", YESTERDAY)
+                .append("Today", NOW)
+                .append("Tomorrow", TOMORROW)
+                .build();
+
+        final TestData td0_ = new HipCompareToTestData(
+                STRING_DATE_MAP,
+                NOW,
+                BIG_DECIMAL,
+                USER_COMPARABLE_ARRAY,
+                INT_USER_COMPARABLE_MAP,
+                STRING,
+                INT,
+                FLOAT);
+
+        final TestData td1_ = new HipCompareToTestData(
+                STRING_DATE_MAP,
+                NOW,
+                BIG_DECIMAL,
+                USER_COMPARABLE_ARRAY,
+                INT_USER_COMPARABLE_MAP,
+                STRING,
+                INT,
+                FLOAT);
+
+        final TestData td2_ = new HipCompareToTestData(
+                STRING_DATE_MAP,
+                NOW,
+                BIG_DECIMAL,
+                USER_COMPARABLE_ARRAY,
+                INT_USER_COMPARABLE_MAP,
+                STRING,
+                INT,
+                FLOAT);
+
+        return new Object[][]{
+            {td0_, td1_, td2_}
+        };
     }
 
-    @Test
-    public void testConsistency() {
-        assertTrue(true);
+    @Test(dataProvider = "transitiveTestData")
+    public void testTransitivity(final TestData a, final TestData b, final TestData c) {
+        final int ab_ = a.compareTo(b);
+        final int bc_ = b.compareTo(c);
+        final int ac_ = a.compareTo(c);
+        assertTrue((ab_ == bc_) && (ab_ == ac_));
+    }
+
+    @Test(dataProvider = "reflexiveTestData")
+    public void testConsistency(final TestData data) {
+        assertTrue(data.compareTo(null) > 0);
     }
 
     @Test(dataProvider = "reflexiveTestData")
@@ -337,7 +418,7 @@ public class CompareToTest {
 
     private final static class OldSchoolCompareToTestData extends TestData implements Comparable<TestData> {
 
-        public OldSchoolCompareToTestData(
+        OldSchoolCompareToTestData(
                 Map<String, Date> p0,
                 Date p1,
                 BigDecimal p2,
@@ -538,7 +619,7 @@ public class CompareToTest {
 
     private final static class HipCompareToTestData extends TestData implements Comparable<TestData> {
 
-        public HipCompareToTestData(
+        HipCompareToTestData(
                 Map<String, Date> p0,
                 Date p1,
                 BigDecimal p2,
@@ -552,19 +633,21 @@ public class CompareToTest {
 
         @Override
         public int compareTo(final TestData that) {
-            return compareToBuilder()
-                    .append(getStringDateMap(), that.getStringDateMap())
-                    .append(getDate(), that.getDate())
-                    .append(getBigDecimal(), that.getBigDecimal())
-                    .append(getComparableElementArray(), that.getComparableElementArray())
-                    .append(getIcMap(), that.getIcMap())
-                    .append(getString(), that.getString())
-                    .append(getInt(), that.getInt())
-                    .append(getFloat(), that.getFloat())
-                    //                    .append(getRefArrayMap(), that.getRefArrayMap())
-                    .build();
+            if (isComparable(that)) {
+                return GREATER_THAN;
+            } else {
+                return compareToBuilder()
+                        .append(getStringDateMap(), that.getStringDateMap())
+                        .append(getDate(), that.getDate())
+                        .append(getBigDecimal(), that.getBigDecimal())
+                        .append(getComparableElementArray(), that.getComparableElementArray())
+                        .append(getIcMap(), that.getIcMap())
+                        .append(getString(), that.getString())
+                        .append(getInt(), that.getInt())
+                        .append(getFloat(), that.getFloat())
+                        .build();
+            }
         }
-
     }
 
     private final static class OldSchoolUserComparable extends UserComparable implements Comparable<UserComparable> {
@@ -599,9 +682,13 @@ public class CompareToTest {
 
         @Override
         public int compareTo(final UserComparable that) {
-            return compareToBuilder()
-                    .append(getKey(), that.getKey())
-                    .build();
+            if (isComparable(that)) {
+                return compareToBuilder()
+                        .append(getKey(), that.getKey())
+                        .build();
+            } else {
+                return EQUAL;
+            }
         }
     }
 }

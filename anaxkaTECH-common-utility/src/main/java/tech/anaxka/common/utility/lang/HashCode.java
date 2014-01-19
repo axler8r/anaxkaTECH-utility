@@ -3,6 +3,7 @@ package tech.anaxka.common.utility.lang;
 import tech.anaxka.common.utility.functor.Builder;
 
 public class HashCode {
+    private HashCode() {}
 
     public static HashCodeBuilder hashCodeBuilder() {
         return new HashCodeBuilderImpl();
