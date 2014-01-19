@@ -18,6 +18,9 @@ import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
 import static tech.anaxka.common.utility.lang.CompareTo.GREATER_THAN;
 import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
 import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
+import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
+import static tech.anaxka.common.utility.lang.Equals.isEquatable;
+import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
 
 /**
  *
@@ -36,45 +39,6 @@ public class CompareToTest {
     Object[][] reflexiveTestData() {
         final Random random_ = new Random();
 
-        final TestData reflexiveOldSchoolTestData_ = new OldSchoolCompareToTestData(
-                mapBuilder(new HashMap<String, Date>())
-                .append("Yesterday",
-                        dateTimeBuilder()
-                        .setCurrentDateTime(new Date())
-                        .addDay(-1)
-                        .build())
-                .build(),
-                dateTimeBuilder()
-                .build(),
-                new BigDecimal("258963147.369852147"),
-                new UserComparable[]{
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable()
-                },
-                mapBuilder(new HashMap<Integer, OldSchoolUserComparable>())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .build(),
-                UUID.randomUUID().toString(),
-                random_.nextInt(),
-                random_.nextFloat());
-
         final TestData reflexiveHipTestData_ = new HipCompareToTestData(
                 mapBuilder(new HashMap<String, Date>())
                 .append(
@@ -88,35 +52,35 @@ public class CompareToTest {
                 .build(),
                 new BigDecimal("258963147.369852147"),
                 new UserComparable[]{
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable(),
-                    new OldSchoolUserComparable()
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable(),
+                    new HipUserComparable()
                 },
-                mapBuilder(new HashMap<Integer, OldSchoolUserComparable>())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
+                mapBuilder(new HashMap<Integer, HipUserComparable>())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
                 .build(),
                 UUID.randomUUID().toString(),
                 random_.nextInt(),
                 random_.nextFloat());
 
         return new Object[][]{
-            {reflexiveOldSchoolTestData_},
             {reflexiveHipTestData_}
         };
     }
@@ -141,54 +105,34 @@ public class CompareToTest {
         final float FLOAT = random_.nextFloat();
         final BigDecimal BIG_DECIMAL = new BigDecimal("258963147.369852147456987123");
         final UserComparable[] USER_COMPARABLE_ARRAY = new UserComparable[]{
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable()
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable()
         };
-        final Map INT_USER_COMPARABLE_MAP = mapBuilder(new HashMap<Integer, OldSchoolUserComparable>())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
+        final Map INT_USER_COMPARABLE_MAP = mapBuilder(new HashMap<Integer, HipUserComparable>())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
                 .build();
         final Map STRING_DATE_MAP = mapBuilder(new HashMap<String, Date>())
                 .append("Yesterday", YESTERDAY)
                 .append("Today", NOW)
                 .append("Tomorrow", TOMORROW)
                 .build();
-
-        final TestData sostd0_ = new OldSchoolCompareToTestData(
-                STRING_DATE_MAP,
-                NOW,
-                BIG_DECIMAL,
-                USER_COMPARABLE_ARRAY,
-                INT_USER_COMPARABLE_MAP,
-                STRING,
-                INT,
-                FLOAT);
-
-        final TestData sostd1_ = new OldSchoolCompareToTestData(
-                STRING_DATE_MAP,
-                NOW,
-                BIG_DECIMAL,
-                USER_COMPARABLE_ARRAY,
-                INT_USER_COMPARABLE_MAP,
-                STRING,
-                INT,
-                FLOAT);
 
         final TestData shtd0_ = new HipCompareToTestData(
                 STRING_DATE_MAP,
@@ -211,7 +155,6 @@ public class CompareToTest {
                 FLOAT);
 
         return new Object[][]{
-            {sostd0_, sostd1_},
             {shtd0_, shtd1_}
         };
     }
@@ -237,28 +180,28 @@ public class CompareToTest {
         final float FLOAT = random_.nextFloat();
         final BigDecimal BIG_DECIMAL = new BigDecimal("258963147.369852147456987123");
         final UserComparable[] USER_COMPARABLE_ARRAY = new UserComparable[]{
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable(),
-            new OldSchoolUserComparable()
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable(),
+            new HipUserComparable()
         };
-        final Map INT_USER_COMPARABLE_MAP = mapBuilder(new HashMap<Integer, OldSchoolUserComparable>())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
-                .append(random_.nextInt(), new OldSchoolUserComparable())
+        final Map INT_USER_COMPARABLE_MAP = mapBuilder(new HashMap<Integer, HipUserComparable>())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
+                .append(random_.nextInt(), new HipUserComparable())
                 .build();
         final Map STRING_DATE_MAP = mapBuilder(new HashMap<String, Date>())
                 .append("Yesterday", YESTERDAY)
@@ -373,7 +316,7 @@ public class CompareToTest {
             __bd = new BigDecimal(p2.toString());
             __cis = Arrays.copyOf(p3, p3.length);
             __icMap = new HashMap<>(p4);
-            __string = new String(p5);
+            __string = p5;
             __int = p6;
             __float = p7;
         }
@@ -391,7 +334,7 @@ public class CompareToTest {
          * @return
          */
         public Date getDate() {
-            return __date;
+            return new Date(__date.getTime());
         }
 
         /**
@@ -407,7 +350,7 @@ public class CompareToTest {
          * @return
          */
         public UserComparable[] getComparableElementArray() {
-            return __cis;
+            return Arrays.copyOf(__cis, __cis.length);
         }
 
         /**
@@ -465,9 +408,9 @@ public class CompareToTest {
         }
     }
 
-    private final static class OldSchoolCompareToTestData extends TestData implements Comparable<TestData> {
+    private final static class HipCompareToTestData extends TestData {
 
-        OldSchoolCompareToTestData(
+        HipCompareToTestData(
                 Map<String, Date> p0,
                 Date p1,
                 BigDecimal p2,
@@ -480,204 +423,25 @@ public class CompareToTest {
         }
 
         @Override
-        public int compareTo(final TestData that) {
-            int result_ = 0;
+        public boolean equals(final Object that) {
+            boolean result_ = false;
 
-            if (this == that) {
-                return result_;
-            }
-            if (that == null) {
-                return 1;
-            }
+            if (isEquatable(this, that)) {
+                final HipCompareToTestData that_ = HipCompareToTestData.class.cast(that);
 
-            if (null == getStringDateMap()) {
-                if (null != that.getStringDateMap()) {
-                    result_ = -1;
-                }
-            } else if (null != that.getStringDateMap()) {
-                if (getStringDateMap().size() == that.getStringDateMap().size()) {
-                    final Iterator<String> lhski_ = getStringDateMap().keySet().iterator();
-                    final Iterator<String> rhski_ = that.getStringDateMap().keySet().iterator();
-                    while (lhski_.hasNext() && result_ == 0) {
-                        final String lhsk_ = lhski_.next();
-                        final String rhsk_ = rhski_.next();
-                        result_ = lhsk_.compareTo(rhsk_);
-                        if (result_ == 0) {
-                            result_ = getStringDateMap().get(lhsk_).compareTo(that.getStringDateMap().get(rhsk_));
-                        }
-                    }
-
-                    return result_;
-                } else {
-                    Iterator<String> ski_;
-                    Iterator<String> lki_;
-                    if (getStringDateMap().size() < that.getStringDateMap().size()) {
-                        ski_ = getStringDateMap().keySet().iterator();
-                        lki_ = that.getStringDateMap().keySet().iterator();
-                    } else {
-                        ski_ = getStringDateMap().keySet().iterator();
-                        lki_ = that.getStringDateMap().keySet().iterator();
-                    }
-                    while (ski_.hasNext() && result_ == 0) {
-                        final String lhsk_ = ski_.next();
-                        final String rhsk_ = lki_.next();
-                        result_ = lhsk_.compareTo(rhsk_);
-                        if (result_ == 0) {
-                            result_ = getStringDateMap().get(lhsk_).compareTo(getStringDateMap().get(rhsk_));
-                        }
-                    }
-                }
-            }
-            if (result_ != 0) {
-                return result_;
-            }
-
-            if (null == getDate()) {
-                if (null != that.getDate()) {
-                    result_ = -1;
-                }
-            } else if (null != that.getDate()) {
-                result_ = getDate().compareTo(that.getDate());
-            }
-            if (result_ != 0) {
-                return result_;
-            }
-
-            if (null == getBigDecimal()) {
-                if (null != that.getBigDecimal()) {
-                    result_ = -1;
-                }
-            } else if (null != that.getBigDecimal()) {
-                result_ = getBigDecimal().compareTo(that.getBigDecimal());
-            }
-            if (result_ != 0) {
-                return result_;
-            }
-
-            if (null == getComparableElementArray()) {
-                if (null != that.getComparableElementArray()) {
-                    result_ = -1;
-                }
-            } else if (null != that.getComparableElementArray()) {
-                if (getComparableElementArray().length < that.getComparableElementArray().length) {
-                    for (int i_ = 0; i_ <= getComparableElementArray().length; i_++) {
-                        final UserComparable lhuc_ = getComparableElementArray()[i_];
-                        final UserComparable rhuc_ = that.getComparableElementArray()[i_];
-                        if (null == lhuc_) {
-                            if (null != rhuc_) {
-                                result_ = -1;
-                            }
-                        } else if (null != rhuc_) {
-                            result_ = lhuc_.compareTo(rhuc_);
-                        }
-                        if (result_ != 0) {
-                            return result_;
-                        }
-                    }
-                } else {
-                    for (int i_ = 0; i_ < getComparableElementArray().length; i_++) {
-                        final UserComparable lhuc_ = that.getComparableElementArray()[i_];
-                        final UserComparable rhuc_ = getComparableElementArray()[i_];
-                        if (null == lhuc_) {
-                            if (null != rhuc_) {
-                                result_ = -1;
-                            }
-                        } else if (null != rhuc_) {
-                            result_ = lhuc_.compareTo(rhuc_);
-                        }
-                        if (result_ != 0) {
-                            return result_;
-                        }
-                    }
-                }
-            }
-            if (result_ != 0) {
-                return result_;
-            }
-
-            if (null == getIcMap()) {
-                if (null != that.getIcMap()) {
-                    result_ = -1;
-                }
-            } else if (null != that.getIcMap()) {
-                if (getIcMap().size() == that.getIcMap().size()) {
-                    final Iterator<Integer> lhski_ = getIcMap().keySet().iterator();
-                    final Iterator<Integer> rhski_ = that.getIcMap().keySet().iterator();
-                    while (lhski_.hasNext() && result_ == 0) {
-                        final Integer lhsk_ = lhski_.next();
-                        final Integer rhsk_ = rhski_.next();
-                        result_ = lhsk_.compareTo(rhsk_);
-                        if (result_ == 0) {
-                            result_ = getIcMap().get(lhsk_).compareTo(that.getIcMap().get(rhsk_));
-                        }
-                    }
-
-                    return result_;
-                } else {
-                    Iterator<Integer> ski_;
-                    Iterator<Integer> lki_;
-                    if (getIcMap().size() < that.getIcMap().size()) {
-                        ski_ = getIcMap().keySet().iterator();
-                        lki_ = that.getIcMap().keySet().iterator();
-                    } else {
-                        ski_ = getIcMap().keySet().iterator();
-                        lki_ = that.getIcMap().keySet().iterator();
-                    }
-                    while (ski_.hasNext() && result_ == 0) {
-                        final Integer lhsk_ = ski_.next();
-                        final Integer rhsk_ = lki_.next();
-                        result_ = lhsk_.compareTo(rhsk_);
-                        if (result_ == 0) {
-                            result_ = getIcMap().get(lhsk_).compareTo(getIcMap().get(rhsk_));
-                        }
-                    }
-                }
-            }
-            if (result_ != 0) {
-                return result_;
-            }
-
-            if (null == getString()) {
-                if (null != that.getString()) {
-                    result_ = -1;
-                }
-            } else if (null != that.getString()) {
-                result_ = getString().compareTo(that.getString());
-            }
-            if (result_ != 0) {
-                return result_;
-            }
-
-            final int lhsi_ = getInt();
-            final int rhsi_ = that.getInt();
-            result_ = lhsi_ < rhsi_ ? -1 : (lhsi_ == rhsi_ ? 0 : 1);
-            if (result_ != 0) {
-                return result_;
-            }
-
-            final float lhsf_ = getFloat();
-            final float rhsf_ = that.getFloat();
-            result_ = lhsf_ < rhsf_ ? -1 : (lhsf_ == rhsf_ ? 0 : 1);
-            if (result_ != 0) {
-                return result_;
+                result_ = equalsBuilder()
+                        .append(getStringDateMap(), that_.getStringDateMap())
+                        .append(getDate(), that_.getDate())
+                        .append(getBigDecimal(), that_.getBigDecimal())
+                        .append(getComparableElementArray(), that_.getComparableElementArray())
+                        .append(getIcMap(), that_.getIcMap())
+                        .append(getString(), that_.getString())
+                        .append(getInt(), that_.getInt())
+                        .append(getFloat(), that_.getFloat())
+                        .build();
             }
 
             return result_;
-        }
-    }
-
-    private final static class HipCompareToTestData extends TestData implements Comparable<TestData> {
-
-        HipCompareToTestData(
-                Map<String, Date> p0,
-                Date p1,
-                BigDecimal p2,
-                UserComparable[] p3,
-                Map<Integer, UserComparable> p4,
-                String p5,
-                int p6,
-                float p7) {
-            super(p0, p1, p2, p3, p4, p5, p6, p7);
         }
 
         @Override
@@ -697,38 +461,40 @@ public class CompareToTest {
                 return GREATER_THAN;
             }
         }
-    }
-
-    private final static class OldSchoolUserComparable extends UserComparable implements Comparable<UserComparable> {
 
         @Override
-        public int compareTo(final UserComparable that) {
-            int result_ = 0;
+        public int hashCode() {
+            return hashCodeBuilder()
+                    .append(getStringDateMap())
+                    .append(getDate())
+                    .append(getBigDecimal())
+                    .append(getComparableElementArray())
+                    .append(getIcMap())
+                    .append(getString())
+                    .append(getInt())
+                    .append(getFloat())
+                    .build();
+        }
+    }
 
-            if (this == that) {
-                return result_;
-            }
-            if (that == null) {
-                return 1;
-            }
+    private final static class HipUserComparable extends UserComparable {
 
-            if (null == getKey()) {
-                if (null != that.getKey()) {
-                    result_ = -1;
-                }
-            } else if (null != that.getKey()) {
-                result_ = getKey().compareTo(that.getKey());
-            }
-            if (result_ != 0) {
-                return result_;
+        @Override
+        public boolean equals(final Object that) {
+            boolean result_ = false;
+
+            if (isEquatable(this, that)) {
+                final UserComparable that_ = UserComparable.class.cast(that);
+
+                result_ = equalsBuilder()
+                        .append(getKey(), that_.getKey())
+                        .build();
             }
 
             return result_;
         }
-    }
 
-    private final static class HipUserComparable extends UserComparable implements Comparable<UserComparable> {
-
+        
         @Override
         public int compareTo(final UserComparable that) {
             if (isComparable(that)) {
@@ -738,6 +504,11 @@ public class CompareToTest {
             } else {
                 return EQUAL;
             }
+        }
+
+        @Override
+        public int hashCode() {
+            return hashCodeBuilder().append(getKey()).build();
         }
     }
 }
