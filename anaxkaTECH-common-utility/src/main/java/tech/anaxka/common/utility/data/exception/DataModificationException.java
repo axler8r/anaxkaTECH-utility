@@ -1,35 +1,53 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
+/* 
+ * Copyright © 2011, 4axka (Pty) Ltd
+ * All rights reserved.
  *
- * The content of DataModificationException.java is strictly CONFIDENTIAL.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those
+ * of the authors and should not be interpreted as representing official policies,
+ * either expressed or implied, of the FreeBSD Project.
  */
 package tech.anaxka.common.utility.data.exception;
 
-
+/**
+ *
+ * @author Axl Mattheus
+ */
 public class DataModificationException extends Exception {
     /**
-     * Determines if a de-serialised file is compatible with this class.
-     * <p>
-     * Maintainers <strong>MUST</strong> change this value if and only if the new version of
-     * this class is not compatible with the previous version. It is not necessary to include
-     * in first version of the class, but included here as a reminder of its importance.
-     * 
-     * @see <a href="http://bit.ly/aDUV5">Java Object Serialization Specification</a>.
+     * <p>Constructor for DataModificationException.</p>
      */
-    private static final long serialVersionUID = -2290808652313826699L;
-
     public DataModificationException() {
         super();
     }
 
+    /**
+     * <p>Constructor for DataModificationException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Throwable} object.
+     * @param enableSuppression a boolean.
+     * @param writableStackTrace a boolean.
+     */
     public DataModificationException(
             final String message,
             final Throwable cause,
@@ -38,14 +56,30 @@ public class DataModificationException extends Exception {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 
+    /**
+     * <p>Constructor for DataModificationException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     * @param cause a {@link java.lang.Throwable} object.
+     */
     public DataModificationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
+    /**
+     * <p>Constructor for DataModificationException.</p>
+     *
+     * @param message a {@link java.lang.String} object.
+     */
     public DataModificationException(final String message) {
         super(message);
     }
 
+    /**
+     * <p>Constructor for DataModificationException.</p>
+     *
+     * @param cause a {@link java.lang.Throwable} object.
+     */
     public DataModificationException(final Throwable cause) {
         super(cause);
     }

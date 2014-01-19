@@ -1,3 +1,31 @@
+/* 
+ * Copyright © 2011, 4axka (Pty) Ltd
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those
+ * of the authors and should not be interpreted as representing official policies,
+ * either expressed or implied, of the FreeBSD Project.
+ */
 package tech.anaxka.common.utility.lang;
 
 import java.lang.reflect.Array;
@@ -8,26 +36,39 @@ import java.util.Map;
 import tech.anaxka.common.utility.functor.Builder;
 
 /**
- * Facilitates implementation of {@link Comparable}.
+ * Facilitates implementation of {@link java.lang.Comparable}.
  * <p>
+ *
  * @author Axl Mattheus
+ * @version $Id: $Id
  */
 public class CompareTo {
+    /** Constant <code>LESS_THAN=-1</code> */
     public static final int LESS_THAN = -1;
+    /** Constant <code>EQUAL=0</code> */
     public static final int EQUAL = 0;
+    /** Constant <code>GREATER_THAN=1</code> */
     public static final int GREATER_THAN = 1;
 
     private CompareTo() {}
 
     /**
-     * Constructs an implementation of {@link CompareToBuilder}.
+     * Constructs an implementation of {@link tech.anaxka.common.utility.lang.CompareTo.CompareToBuilder}.
      * <p>
+     *
      * @return A newly constructed {@linkplain CompareToBuilder}.
      */
     public static CompareToBuilder compareToBuilder() {
         return new CompareToBuilderImpl();
     }
 
+    /**
+     * <p>isComparable.</p>
+     *
+     * @param that a T object.
+     * @param <T> a T object.
+     * @return a boolean.
+     */
     public static <T> boolean isComparable(final T that) {
         return that != null;
     }

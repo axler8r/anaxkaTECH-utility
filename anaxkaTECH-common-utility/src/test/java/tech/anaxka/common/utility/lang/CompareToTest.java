@@ -1,28 +1,3 @@
-/*
- * Copyright (c) 2014, Adolf.Mattheus
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
 package tech.anaxka.common.utility.lang;
 
 import java.math.BigDecimal;
@@ -48,8 +23,12 @@ import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
  *
  * @author Adolf.Mattheus
  */
+@Test(singleThreaded = true)
 public class CompareToTest {
 
+    /**
+     *
+     */
     public CompareToTest() {
     }
 
@@ -322,6 +301,12 @@ public class CompareToTest {
         };
     }
 
+    /**
+     *
+     * @param a
+     * @param b
+     * @param c
+     */
     @Test(dataProvider = "transitiveTestData")
     public void testTransitivity(final TestData a, final TestData b, final TestData c) {
         final int ab_ = a.compareTo(b);
@@ -330,16 +315,27 @@ public class CompareToTest {
         assertTrue((ab_ == bc_) && (ab_ == ac_));
     }
 
+    /**
+     *
+     * @param data
+     */
     @Test(dataProvider = "reflexiveTestData")
     public void testConsistency(final TestData data) {
         assertTrue(data.compareTo(null) > 0);
     }
 
+    /**
+     *
+     * @param data
+     */
     @Test(dataProvider = "reflexiveTestData")
     public void testNullComparison(final TestData data) {
         assertTrue(data.compareTo(null) > 0);
     }
 
+    /**
+     *
+     */
     public abstract static class TestData implements Comparable<TestData> {
 
         private final Map<String, Date> __sdMap;
@@ -351,6 +347,17 @@ public class CompareToTest {
         private final int __int;
         private final float __float;
 
+        /**
+         *
+         * @param p0
+         * @param p1
+         * @param p2
+         * @param p3
+         * @param p4
+         * @param p5
+         * @param p6
+         * @param p7
+         */
         @SuppressWarnings("RedundantStringConstructorCall")
         public TestData(
                 final Map<String, Date> p0,
@@ -371,46 +378,88 @@ public class CompareToTest {
             __float = p7;
         }
 
+        /**
+         *
+         * @return
+         */
         public Map<String, Date> getStringDateMap() {
             return __sdMap;
         }
 
+        /**
+         *
+         * @return
+         */
         public Date getDate() {
             return __date;
         }
 
+        /**
+         *
+         * @return
+         */
         public BigDecimal getBigDecimal() {
             return __bd;
         }
 
+        /**
+         *
+         * @return
+         */
         public UserComparable[] getComparableElementArray() {
             return __cis;
         }
 
+        /**
+         *
+         * @return
+         */
         public Map<Integer, UserComparable> getIcMap() {
             return __icMap;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getString() {
             return __string;
         }
 
+        /**
+         *
+         * @return
+         */
         public int getInt() {
             return __int;
         }
 
+        /**
+         *
+         * @return
+         */
         public float getFloat() {
             return __float;
         }
     }
 
+    /**
+     *
+     */
     public abstract static class UserComparable implements Comparable<UserComparable> {
 
         private final UUID __key = UUID.randomUUID();
 
+        /**
+         *
+         */
         public UserComparable() {
         }
 
+        /**
+         *
+         * @return
+         */
         public UUID getKey() {
             return __key;
         }
@@ -634,8 +683,6 @@ public class CompareToTest {
         @Override
         public int compareTo(final TestData that) {
             if (isComparable(that)) {
-                return GREATER_THAN;
-            } else {
                 return compareToBuilder()
                         .append(getStringDateMap(), that.getStringDateMap())
                         .append(getDate(), that.getDate())
@@ -646,6 +693,8 @@ public class CompareToTest {
                         .append(getInt(), that.getInt())
                         .append(getFloat(), that.getFloat())
                         .build();
+            } else {
+                return GREATER_THAN;
             }
         }
     }

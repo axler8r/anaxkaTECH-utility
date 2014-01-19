@@ -1,15 +1,30 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
+/* 
+ * Copyright © 2011, 4axka (Pty) Ltd
+ * All rights reserved.
  *
- * The content of ToString.java is strictly CONFIDENTIAL.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those
+ * of the authors and should not be interpreted as representing official policies,
+ * either expressed or implied, of the FreeBSD Project.
  */
 package tech.anaxka.common.utility.lang;
 
@@ -21,32 +36,96 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import tech.anaxka.common.utility.functor.Builder;
 
+/**
+ *
+ * @author Axl Mattheus
+ */
 public class ToString {
 
     private ToString() {}
 
+    /**
+     * <p>toStringBuilder.</p>
+     *
+     * @param subject a {@link java.lang.Object} object.
+     * @return a {@link tech.anaxka.common.utility.lang.ToString.ToStringBuilder} object.
+     */
     public static final ToStringBuilder toStringBuilder(final Object subject) {
         return new ToStringBuilderImpl(subject);
     }
 
+    /**
+     *
+     */
     public static interface ToStringBuilder extends Builder<String> {
 
+        /**
+         *
+         * @param <S>
+         * @param label
+         * @param subject
+         * @return
+         */
         <S> ToStringBuilder append(final String label, final S subject);
 
+        /**
+         *
+         * @param <C>
+         * @param label
+         * @param collection
+         * @return
+         */
         <C extends Collection<?>> ToStringBuilder append(final String label, final C collection);
 
+        /**
+         *
+         * @param label
+         * @param array
+         * @return
+         */
         ToStringBuilder append(final String label, final Object[] array);
 
+        /**
+         *
+         * @param <M>
+         * @param label
+         * @param map
+         * @return
+         */
         <M extends Map<?, ?>> ToStringBuilder append(final String label, final M map);
 
+        /**
+         *
+         * @param depth
+         * @return
+         */
         ToStringBuilder setUnrollDepth(final int depth);
 
+        /**
+         *
+         * @param pretty
+         * @return
+         */
         ToStringBuilder setPrettyPrint(final boolean pretty);
 
+        /**
+         *
+         * @param display
+         * @return
+         */
         ToStringBuilder setDisplayLoadLocation(final boolean display);
 
+        /**
+         *
+         * @param string
+         * @return
+         */
         String prettyPrint(final String string);
 
+        /**
+         *
+         * @return
+         */
         @Override
         String build();
     }
