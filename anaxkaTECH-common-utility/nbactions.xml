@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+        <actionName>CUSTOM-license-check</actionName>
+        <displayName>license-check</displayName>
+        <goals>
+            <goal>license:check</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>CUSTOM-license-insert</actionName>
+        <displayName>license-insert</displayName>
+        <goals>
+            <goal>license:format</goal>
+        </goals>
+    </action>
+</actions>
