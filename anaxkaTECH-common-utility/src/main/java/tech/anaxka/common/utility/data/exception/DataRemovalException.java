@@ -28,26 +28,33 @@
  */
 package tech.anaxka.common.utility.data.exception;
 
+
 /**
+ * Exception thrown when data cannot be removed from a persistence mechanism.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public class DataRemovalException extends Exception {
+public class DataRemovalException
+        extends Exception {
+
     private static final long serialVersionUID = 1189132013822008561L;
 
-    /**
-     *
-     */
+    /** {@inheritdoc} */
     public DataRemovalException() {
         super();
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
-     * @param cause
-     * @param enableSuppression
-     * @param writableStackTrace
+     * @param message            see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param cause              see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param enableSuppression  see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param writableStackTrace see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
      */
     public DataRemovalException(
             final String message,
@@ -58,25 +65,28 @@ public class DataRemovalException extends Exception {
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
-     * @param cause
+     * @param message see {@link Exception#Exception(String message, Throwable cause)}.
+     * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
     public DataRemovalException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
+     * @param message see {@link Exception#Exception(String message)}.
      */
     public DataRemovalException(final String message) {
         super(message);
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param cause
+     * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataRemovalException(final Throwable cause) {
         super(cause);

@@ -28,17 +28,25 @@
  */
 package tech.anaxka.common.utility.builder;
 
+
 import java.util.List;
 import tech.anaxka.common.utility.functor.Builder;
 
+
 /**
+ * A {@linkplain Builder builder} for {@linkplain List list} objects.
  *
- * @author Adolf.Mattheus
- * @param <T>
+ * @param <T> the type of the @{link List list} under construction.
+ *
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ * @see Builder
+ * @see List
  */
-public class ListBuilder<T> implements Builder<List<T>> {
+public class ListBuilder<T>
+        implements Builder<List<T>> {
+
     private final List<T> __;
-    
+
     private ListBuilder(final List<T> list) {
         if (list == null) {
             throw new IllegalArgumentException();
@@ -46,31 +54,36 @@ public class ListBuilder<T> implements Builder<List<T>> {
 
         __ = list;
     }
-    
+
     /**
+     * Creates a {@link ListBuilder builder} to make population of the specified {@link List list}
+     * simple.
      *
-     * @param <T>
-     * @param list
-     * @return
+     * @param <T>  the type of the {@link List list} under construction. The Java compiler should be
+     *             intelligent enough to infer &lt;T&gt;.
+     * @param list the {@link List list} under construction.
+     *
+     * @return A {@link ListBuilder builder} to continue the construction of the
+     *         {@linkplain List underlying list}.
      */
     public static final <T> ListBuilder listBuilder(final List<T> list) {
         return new ListBuilder(list);
     }
 
     /**
+     * Adds an element to the @{link List list} under construction.
+     * 
+     * @param element the element to add to the list.
      *
-     * @param element
-     * @return
+     * @return A {@link ListBuilder builder} to continue the construction of the
+     *         {@linkplain List underlying list}.
      */
     public ListBuilder append(final T element) {
         __.add(element);
         return this;
     }
 
-    /**
-     *
-     * @return
-     */
+    /** {@inheritdoc} */
     @Override
     public List<T> build() {
         return __;

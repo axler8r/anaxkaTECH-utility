@@ -28,31 +28,39 @@
  */
 package tech.anaxka.common.utility.lang;
 
+
 import tech.anaxka.common.utility.functor.Builder;
 
+
 /**
+ * A {@link Builder builder} to help construct concise
+ * {@link Object#equals(java.lang.Object) equals} implementations.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ * @see Object#equals(java.lang.Object) 
  */
 public class Equals {
-    private Equals() {}
+
+    private Equals() {
+    }
 
     /**
-     * <p>isEquatable.</p>
+     * Evaluates if two {@link Object object}s are equitable.
+     * 
+     * @param <T> the type of the {@link Object object}s being evaluated.
+     * @param lhs the left-hand-side.
+     * @param rhs the right-hand-side.
      *
-     * @param lhs a T object.
-     * @param rhs a T object.
-     * @param <T> a T object.
-     * @return a boolean.
+     * @return {@code true} if the two instances are equitable.
      */
     public static final <T> boolean isEquatable(final T lhs, final T rhs) {
         return !isSameObject(lhs, rhs) && !isNull(rhs) && isAssignmentCompatible(lhs, rhs);
     }
 
     /**
-     * <p>equalsBuilder.</p>
-     *
-     * @return a {@link tech.anaxka.common.utility.lang.Equals.EqualsBuilder} object.
+     * Returns an instance of a {@link Builder builder} to determine equality between two instances.
+     * 
+     * @return An {@link EqualsBuilder}.
      */
     public static EqualsBuilder equalsBuilder() {
         return new EqualsBuilderImpl();
@@ -73,28 +81,32 @@ public class Equals {
     }
 
     /**
-     *
+     * Contract of a {@linkplain Object#equals(java.lang.Object) equals} {@link Builder builder}.
      */
-    public static interface EqualsBuilder extends Builder<Boolean> {
+    public static interface EqualsBuilder
+            extends Builder<Boolean> {
 
         /**
+         * Appends object state of the left-hand-side and right-hand-side of the
+         * {@linkplain Object#equals(java.lang.Object) equals} operation.
          *
-         * @param <T>
-         * @param lhs
-         * @param rhs
-         * @return
+         * @param <T> the type of the instances being compared &mdash; inferred by the Java
+         *            compiler.
+         * @param lhs the left-hand-side of the comparison.
+         * @param rhs the right-hand-side of the comparison.
+         *
+         * @return A {@link EqualsBuilder builder} to continue constructing the equals
+         *         operation.
          */
         <T> EqualsBuilder append(final T lhs, final T rhs);
 
-        /**
-         *
-         * @return
-         */
+        /** {@inheritDoc} */
         @Override
         Boolean build();
     }
 
-    private static class EqualsBuilderImpl implements EqualsBuilder {
+    private static class EqualsBuilderImpl
+            implements EqualsBuilder {
 
         private boolean __isEqual = true;
 

@@ -28,6 +28,7 @@
  */
 package tech.anaxka.common.utility.builder;
 
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -36,11 +37,16 @@ import tech.anaxka.common.utility.functor.Builder;
 
 import static java.util.Calendar.getInstance;
 
+
 /**
+ * A {@linkplain Builder builder} for {@linkplain Date date and time} objects.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ * @see Builder
+ * @see Date
  */
-public class DateTimeBuilder implements Builder<Date> {
+public class DateTimeBuilder
+        implements Builder<Date> {
 
     private final Calendar __;
 
@@ -61,146 +67,165 @@ public class DateTimeBuilder implements Builder<Date> {
     }
 
     /**
-     * <p>dateTimeBuilder.</p>
+     * Creates a {@linkplain Builder builder} for {@link Date date}s.
      *
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @return A default {@link DateTimeBuilder builder} for {@linkplain Date date} objects.
      */
     public static final DateTimeBuilder dateTimeBuilder() {
         return new DateTimeBuilder();
     }
-    
+
     /**
-     * <p>dateTimeBuilder.</p>
+     * Creates a {@link DateTimeBuilder#dateTimeBuilder() builder} using the specified
+     * {@link Locale locale}.
      *
-     * @param locale a {@link java.util.Locale} object.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @param locale the {@link Locale locale} to use for construction of the {@link Date date}.
+     *
+     * @return A {@link #dateTimeBuilder() builder} for {@link Date date} objects.
      */
     public static final DateTimeBuilder dateTimeBuilder(final Locale locale) {
         return new DateTimeBuilder(locale);
     }
-    
+
     /**
-     * <p>dateTimeBuilder.</p>
+     * Creates a {@link DateTimeBuilder#dateTimeBuilder() builder} using the specified
+     * {@link TimeZone time zone}.
      *
-     * @param zone a {@link java.util.TimeZone} object.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @param zone the {@link TimeZone zone} to use for the construction of the {@link Date date}.
+     *
+     * @return A {@link #dateTimeBuilder() builder} for {@link Date date} objects.
      */
     public static final DateTimeBuilder dateTimeBuilder(final TimeZone zone) {
         return new DateTimeBuilder(zone);
     }
-    
+
     /**
-     * <p>dateTimeBuilder.</p>
+     * Creates a {@link DateTimeBuilder#dateTimeBuilder() builder} using the specified
+     * {@link TimeZone time zone} and {@link Locale locale}.
      *
-     * @param zone a {@link java.util.TimeZone} object.
-     * @param locale a {@link java.util.Locale} object.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @param zone   the {@link TimeZone zone} to use for the construction of the {@link Date date}.
+     * @param locale the {@link Locale locale} to use for construction of the {@link Date date}.
+     *
+     * @return A {@link #dateTimeBuilder() builder} for {@link Date date} objects.
      */
     public static final DateTimeBuilder dateTimeBuilder(final TimeZone zone, final Locale locale) {
         return new DateTimeBuilder(zone, locale);
     }
-    
+
     /**
-     * <p>setCurrentDateTime.</p>
+     * Initialize the {@link DateTimeBuilder builder} to coincide with the specified
+     * {@link Date date}.
      *
-     * @param currentDateTime a {@link java.util.Date} object.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
-     */
-    public DateTimeBuilder setCurrentDateTime(final Date currentDateTime) {
-        __.setTime(currentDateTime);
-        return this;
-    }
-    
-    /**
-     * <p>addYear.</p>
+     * @param instant the instant in {@link Date time} to initialize the
+     *                {@linkplain DateTimeBuilder builder} to.
      *
-     * @param year a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
+     * @return A {@link DateTimeBuilder builder} initialized to a specific instant in
+     *         {@linkplain Date time}.
      */
-    public DateTimeBuilder addYear(final int year) {
-        __.add(Calendar.YEAR, year);
-        return this;
-    }
-    
-    /**
-     * <p>addMonth.</p>
-     *
-     * @param month a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
-     */
-    public DateTimeBuilder addMonth(final int month) {
-        __.add(Calendar.MONTH, month);
-        return this;
-    }
-    
-    /**
-     * <p>addDay.</p>
-     *
-     * @param day a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
-     */
-    public DateTimeBuilder addDay(final int day) {
-        __.add(Calendar.DAY_OF_MONTH, day);
-        return this;
-    }
-    
-    /**
-     * <p>addHour.</p>
-     *
-     * @param hour a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
-     */
-    public DateTimeBuilder addHour(final int hour) {
-        __.add(Calendar.HOUR, hour);
-        return this;
-    }
-    
-    /**
-     * <p>addMinute.</p>
-     *
-     * @param minute a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
-     */
-    public DateTimeBuilder addMinute(final int minute) {
-        __.add(Calendar.MINUTE, minute);
-        return this;
-    }
-    
-    /**
-     * <p>addSecond.</p>
-     *
-     * @param second a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
-     */
-    public DateTimeBuilder addSecond(final int second) {
-        __.add(Calendar.SECOND, second);
-        return this;
-    }
-    
-    /**
-     * <p>addSecondFraction.</p>
-     *
-     * @param fraction a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
-     * @since 0.08.000.0000
-     */
-    public DateTimeBuilder addSecondFraction(final int fraction) {
-        __.add(Calendar.MILLISECOND, fraction);
+    public DateTimeBuilder setDateTime(final Date instant) {
+        __.setTime(instant);
         return this;
     }
 
     /**
-     * <p>setYear.</p>
+     * Add the specified number of year(s) to the {@link Date date} under construction.
      *
-     * @param year a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @param years a positive or negative number to add to the years.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
+     */
+    public DateTimeBuilder addYears(final int years) {
+        __.add(Calendar.YEAR, years);
+        return this;
+    }
+
+    /**
+     * Add the specified number of month(s) to the {@link Date date} under construction.
+     *
+     * @param months a positive or negative number to add to the months.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
+     */
+    public DateTimeBuilder addMonth(final int months) {
+        __.add(Calendar.MONTH, months);
+        return this;
+    }
+
+    /**
+     * Add the specified number of day(s) to the {@link Date date} under construction.
+     *
+     * @param days a positive or negative number to add to the days.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
+     */
+    public DateTimeBuilder addDays(final int days) {
+        __.add(Calendar.DAY_OF_MONTH, days);
+        return this;
+    }
+
+    /**
+     * Add the specified number of hour(s) to the {@link Date date} under construction.
+     *
+     * @param hours a positive or negative number to add to the hours.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
+     */
+    public DateTimeBuilder addHours(final int hours) {
+        __.add(Calendar.HOUR, hours);
+        return this;
+    }
+
+    /**
+     * Add the specified number of minute(s) to the {@link Date date} under construction.
+     *
+     * @param minutes a positive or negative number to add to the minutes.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
+     */
+    public DateTimeBuilder addMinutes(final int minutes) {
+        __.add(Calendar.MINUTE, minutes);
+        return this;
+    }
+
+    /**
+     * Add the specified number of second(s) to the {@link Date date} under construction.
+     *
+     * @param seconds a positive or negative number to add to the seconds.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
+     */
+    public DateTimeBuilder addSeconds(final int seconds) {
+        __.add(Calendar.SECOND, seconds);
+        return this;
+    }
+
+    /**
+     * Add the specified number of fraction(s) of a second to the {@link Date date} under
+     * construction.
+     *
+     * @param fractions a positive or negative number to add to the year.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
+     */
+    public DateTimeBuilder addSecondFractions(final int fractions) {
+        __.add(Calendar.MILLISECOND, fractions);
+        return this;
+    }
+
+    /**
+     * Set the year for the {@link Date date} under construction.
+     * 
+     * @param year the year of the {@link Date date} under construction.
+     *
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
      */
     public DateTimeBuilder setYear(final int year) {
         __.set(Calendar.YEAR, year);
@@ -208,10 +233,12 @@ public class DateTimeBuilder implements Builder<Date> {
     }
 
     /**
-     * <p>setMonth.</p>
+     * Set the month for the {@link Date date} under construction.
+     * 
+     * @param month the year of the {@link Date date} under construction.
      *
-     * @param month a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
      */
     public DateTimeBuilder setMonth(final int month) {
         __.set(Calendar.MONTH, month);
@@ -219,10 +246,12 @@ public class DateTimeBuilder implements Builder<Date> {
     }
 
     /**
-     * <p>setDay.</p>
+     * Set the day for the {@link Date date} under construction.
+     * 
+     * @param day the year of the {@link Date date} under construction.
      *
-     * @param day a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
      */
     public DateTimeBuilder setDay(final int day) {
         __.set(Calendar.DATE, day);
@@ -230,10 +259,12 @@ public class DateTimeBuilder implements Builder<Date> {
     }
 
     /**
-     * <p>setHour.</p>
+     * Set the hour for the {@link Date date} under construction.
+     * 
+     * @param hour the year of the {@link Date date} under construction.
      *
-     * @param hour a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
      */
     public DateTimeBuilder setHour(final int hour) {
         __.set(Calendar.HOUR, hour);
@@ -241,10 +272,12 @@ public class DateTimeBuilder implements Builder<Date> {
     }
 
     /**
-     * <p>setMinute.</p>
+     * Set the minute for the {@link Date date} under construction.
+     * 
+     * @param minute the year of the {@link Date date} under construction.
      *
-     * @param minute a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
      */
     public DateTimeBuilder setMinute(final int minute) {
         __.set(Calendar.MINUTE, minute);
@@ -252,10 +285,12 @@ public class DateTimeBuilder implements Builder<Date> {
     }
 
     /**
-     * <p>setSecond.</p>
+     * Set the second for the {@link Date date} under construction.
+     * 
+     * @param second the year of the {@link Date date} under construction.
      *
-     * @param second a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
      */
     public DateTimeBuilder setSecond(final int second) {
         __.set(Calendar.SECOND, second);
@@ -263,17 +298,19 @@ public class DateTimeBuilder implements Builder<Date> {
     }
 
     /**
-     * <p>setSecondFraction.</p>
+     * Set the fraction of a second for the {@link Date date} under construction.
+     * 
+     * @param fraction the year of the {@link Date date} under construction.
      *
-     * @param fraction a int.
-     * @return a {@link tech.anaxka.common.utility.builder.DateTimeBuilder} object.
+     * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
+     *         {@link Date time}.
      */
     public DateTimeBuilder setSecondFraction(final int fraction) {
         __.set(Calendar.MILLISECOND, fraction);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritdoc} */
     @Override
     public Date build() {
         return __.getTime();

@@ -28,27 +28,33 @@
  */
 package tech.anaxka.common.utility.data.exception;
 
+
 /**
+ * Base exception relating to persistence mechanism operations.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public class DatabaseException extends Exception {
+public class DatabaseException
+        extends Exception {
+
     private static final long serialVersionUID = 1414063319978461778L;
 
-    /**
-     * <p>Constructor for DatabaseException.</p>
-     */
+    /** {@inheritdoc} */
     public DatabaseException() {
         super();
     }
 
     /**
-     * <p>Constructor for DatabaseException.</p>
+     * {@inheritdoc}
      *
-     * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
-     * @param enableSuppression a boolean.
-     * @param writableStackTrace a boolean.
+     * @param message            see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param cause              see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param enableSuppression  see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param writableStackTrace see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
      */
     public DatabaseException(
             final String message,
@@ -59,28 +65,28 @@ public class DatabaseException extends Exception {
     }
 
     /**
-     * <p>Constructor for DatabaseException.</p>
+     * {@inheritdoc}
      *
-     * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
+     * @param message see {@link Exception#Exception(String message, Throwable cause)}.
+     * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
     public DatabaseException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * <p>Constructor for DatabaseException.</p>
+     * {@inheritdoc}
      *
-     * @param message a {@link java.lang.String} object.
+     * @param message see {@link Exception#Exception(String message)}.
      */
     public DatabaseException(final String message) {
         super(message);
     }
 
     /**
-     * <p>Constructor for DatabaseException.</p>
+     * {@inheritdoc}
      *
-     * @param cause a {@link java.lang.Throwable} object.
+     * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DatabaseException(final Throwable cause) {
         super(cause);

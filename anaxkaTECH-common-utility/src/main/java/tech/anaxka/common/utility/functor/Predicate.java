@@ -31,22 +31,27 @@ package tech.anaxka.common.utility.functor;
 
 import java.io.Serializable;
 
+
 /**
+ * A <a href="http://en.wikipedia.org/wiki/Predicate_(mathematical_logic)>predicate</a> to evaluate.
  *
- * @author Axl Mattheus
- * @param <S>
- * @param <T>
+ * @param <S> the subject under investigation.
+ * @param <X> a possible exception that may be thrown by the investigation operation.
+ *
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public interface Predicate<
-                S extends Serializable,
-                T extends Throwable> extends
+public interface Predicate<S, X extends Throwable>
+        extends
         Serializable {
+
     /**
-     * <p>match.</p>
+     * Is the subject a match?
      *
-     * @param subject a S object.
-     * @return a boolean.
-     * @throws T if any.
+     * @param subject the subject under investigation.
+     *
+     * @return true if the subject matches the investigation.
+     *
+     * @throws X if the investigation encounters an exceptional condition.
      */
-    boolean match(final S subject) throws T;
+    boolean match(final S subject) throws X;
 }

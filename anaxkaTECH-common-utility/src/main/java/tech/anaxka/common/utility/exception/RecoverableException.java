@@ -28,49 +28,34 @@
  */
 package tech.anaxka.common.utility.exception;
 
+
 /**
+ * Exception from which can be recovered.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public class RecoverableException extends RuntimeException {
+public class RecoverableException
+        extends RuntimeException {
+
     private static final long serialVersionUID = -4517820234943773433L;
 
     /**
      *
      */
-    public RecoverableException() {}
-
-    /**
-     *
-     * @param message
-     */
-    public RecoverableException(String message) {
-        super(message);
+    public RecoverableException() {
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param cause
-     */
-    public RecoverableException(Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     *
-     * @param message
-     * @param cause
-     */
-    public RecoverableException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    /**
-     *
-     * @param message
-     * @param cause
-     * @param enableSuppression
-     * @param writableStackTrace
+     * @param message            see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param cause              see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param enableSuppression  see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param writableStackTrace see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
      */
     public RecoverableException(
             String message,
@@ -78,5 +63,33 @@ public class RecoverableException extends RuntimeException {
             boolean enableSuppression,
             boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param message see {@link Exception#Exception(String message, Throwable cause)}.
+     * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
+     */
+    public RecoverableException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param cause see {@link Exception#Exception(Throwable cause)}.
+     */
+    public RecoverableException(Throwable cause) {
+        super(cause);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param message see {@link Exception#Exception(String message)}.
+     */
+    public RecoverableException(String message) {
+        super(message);
     }
 }

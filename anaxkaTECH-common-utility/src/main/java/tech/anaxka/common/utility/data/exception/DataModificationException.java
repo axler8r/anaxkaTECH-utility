@@ -28,27 +28,33 @@
  */
 package tech.anaxka.common.utility.data.exception;
 
+
 /**
+ * Exception thrown when data cannot be modified in a persistence mechanism.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public class DataModificationException extends Exception {
+public class DataModificationException
+        extends Exception {
+
     private static final long serialVersionUID = -2822969952385376751L;
 
-    /**
-     * <p>Constructor for DataModificationException.</p>
-     */
+    /** {@inheritdoc} */
     public DataModificationException() {
         super();
     }
 
     /**
-     * <p>Constructor for DataModificationException.</p>
+     * {@inheritdoc}
      *
-     * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
-     * @param enableSuppression a boolean.
-     * @param writableStackTrace a boolean.
+     * @param message            see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param cause              see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param enableSuppression  see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param writableStackTrace see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
      */
     public DataModificationException(
             final String message,
@@ -59,28 +65,28 @@ public class DataModificationException extends Exception {
     }
 
     /**
-     * <p>Constructor for DataModificationException.</p>
+     * {@inheritdoc}
      *
-     * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
+     * @param message see {@link Exception#Exception(String message, Throwable cause)}.
+     * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
     public DataModificationException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
     /**
-     * <p>Constructor for DataModificationException.</p>
+     * {@inheritdoc}
      *
-     * @param message a {@link java.lang.String} object.
+     * @param message see {@link Exception#Exception(String message)}.
      */
     public DataModificationException(final String message) {
         super(message);
     }
 
     /**
-     * <p>Constructor for DataModificationException.</p>
+     * {@inheritdoc}
      *
-     * @param cause a {@link java.lang.Throwable} object.
+     * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataModificationException(final Throwable cause) {
         super(cause);

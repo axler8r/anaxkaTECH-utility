@@ -28,16 +28,18 @@
  */
 package tech.anaxka.common.utility.functor;
 
+
 /**
- *
- * @author Axl Mattheus
- * @param <T>
+ * A <a href="http://en.wikipedia.org/wiki/Builder_pattern">builder</a>.
+ * 
+ * @param <T> the type of object under construction.
+ * 
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
 public interface Builder<T> {
 
     /**
-     *
-     * @return
+     * @return the constructed object.
      */
     T build();
 }

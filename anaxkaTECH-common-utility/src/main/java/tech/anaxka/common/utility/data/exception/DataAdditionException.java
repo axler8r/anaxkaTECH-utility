@@ -28,26 +28,34 @@
  */
 package tech.anaxka.common.utility.data.exception;
 
+
 /**
- *
- * @author Axl Mattheus
+ * Exception thrown when data cannot be added to a persistence mechanism.
+ * 
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ * @see Exception
  */
-public class DataAdditionException extends Exception {
+public class DataAdditionException
+        extends Exception {
+
     private static final long serialVersionUID = -3169874025586153627L;
 
-    /**
-     *
-     */
+    /** {@inheritdoc} */
     public DataAdditionException() {
         super();
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
-     * @param cause
-     * @param enableSuppression
-     * @param writableStackTrace
+     * @param message            see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param cause              see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param enableSuppression  see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param writableStackTrace see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
      */
     public DataAdditionException(
             final String message,
@@ -58,25 +66,28 @@ public class DataAdditionException extends Exception {
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
-     * @param cause
+     * @param message see {@link Exception#Exception(String message, Throwable cause)}.
+     * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
     public DataAdditionException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
+     * @param message see {@link Exception#Exception(String message)}.
      */
     public DataAdditionException(final String message) {
         super(message);
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param cause
+     * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataAdditionException(final Throwable cause) {
         super(cause);

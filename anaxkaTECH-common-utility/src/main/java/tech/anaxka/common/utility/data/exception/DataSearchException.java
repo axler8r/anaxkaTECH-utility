@@ -28,26 +28,33 @@
  */
 package tech.anaxka.common.utility.data.exception;
 
+
 /**
+ * Exception thrown when data cannot be retrieved from a persistence mechanism because it cannot be found.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public class DataSearchException extends Exception {
+public class DataSearchException
+        extends Exception {
+
     private static final long serialVersionUID = -1985413978207527418L;
 
-    /**
-     *
-     */
+    /** {@inheritdoc} */
     public DataSearchException() {
         super();
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
-     * @param cause
-     * @param enableSuppression
-     * @param writableStackTrace
+     * @param message            see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param cause              see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param enableSuppression  see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param writableStackTrace see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
      */
     public DataSearchException(
             final String message,
@@ -58,25 +65,28 @@ public class DataSearchException extends Exception {
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
-     * @param cause
+     * @param message see {@link Exception#Exception(String message, Throwable cause)}.
+     * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
     public DataSearchException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param message
+     * @param message see {@link Exception#Exception(String message)}.
      */
     public DataSearchException(final String message) {
         super(message);
     }
 
     /**
+     * {@inheritdoc}
      *
-     * @param cause
+     * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataSearchException(final Throwable cause) {
         super(cause);
