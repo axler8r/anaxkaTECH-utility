@@ -1,17 +1,33 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
+/* 
+ * Copyright © 2011, 4axka (Pty) Ltd
+ * All rights reserved.
  *
- * The content of ToString.java is strictly CONFIDENTIAL.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * The views and conclusions contained in the software and documentation are those
+ * of the authors and should not be interpreted as representing official policies,
+ * either expressed or implied, of the FreeBSD Project.
  */
 package tech.anaxka.common.utility.lang;
+
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,77 +35,163 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+import tech.anaxka.common.utility.functor.Builder;
 
-public final class ToString {
+
+/**
+ * A {@link Builder builder} to help construct concise {@link Object#toString() toString}
+ * implementations.
+ *
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ */
+public class ToString {
 
     private ToString() {
     }
 
+    /**
+     * Creates a {@link ToStringBuilder}.
+     *
+     * @param subject the subject for which the toString operation will be created.
+     *
+     * @return a {@link Builder builder} to implement {@link Comparable#toString()} operations.
+     */
     public static final ToStringBuilder toStringBuilder(final Object subject) {
         return new ToStringBuilderImpl(subject);
     }
 
-    public static interface ToStringBuilder {
+    /**
+     * Contract of a {@linkplain Object#toString() to-string} {@link Builder builder}.
+     */
+    public static interface ToStringBuilder
+            extends Builder<String> {
 
+        /**
+         * Appends the label and subject to construct a string representation of an object.
+         *
+         * @param <S>     the type of the subject &mdash; inferred by Javac.
+         * @param label   the label of the subject.
+         * @param subject the subject to append to the string representation of the object.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         <S> ToStringBuilder append(final String label, final S subject);
 
+        /**
+         * Appends the label and a {@link Collection} to construct a string representation of an
+         * object.
+         *
+         * @param <C>        the type of the element of a collection.
+         * @param label      the label of the collection.
+         * @param collection the collection.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         <C extends Collection<?>> ToStringBuilder append(final String label, final C collection);
 
+        /**
+         * Appends a label and an array to construct a string representation of an object.
+         *
+         * @param label the label of the array.
+         * @param array the content of the array.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         ToStringBuilder append(final String label, final Object[] array);
 
+        /**
+         * Appends a label and a map to construct a string representation of an object.
+         *
+         * @param <M>   map.
+         * @param label label.
+         * @param map   the map to unroll.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         <M extends Map<?, ?>> ToStringBuilder append(final String label, final M map);
 
+        /**
+         * How many elements in a collection should be displayed?
+         *
+         * @param depth the number of elements that should be displayed.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         ToStringBuilder setUnrollDepth(final int depth);
 
+        /**
+         * Should the {@link Object#toString()} operation pretty print the string?
+         *
+         * @param pretty {@code true} to pretty print the string. The default is {@code false}.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         ToStringBuilder setPrettyPrint(final boolean pretty);
 
+        /**
+         * Should the operation display where the class was loaded from?
+         *
+         * @param display default is {@code true}.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         ToStringBuilder setDisplayLoadLocation(final boolean display);
 
+        /**
+         * Utility operation to turn the output of {@link Object#toString()} into a pretty string.
+         *
+         * @param string the string to pretty print.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
+         */
         String prettyPrint(final String string);
 
-        String string();
+        /** {@inheritDoc} */
+        @Override
+        String build();
     }
 
-    private static final class ToStringBuilderImpl implements ToStringBuilder {
+    private static class ToStringBuilderImpl
+            implements ToStringBuilder {
 
         private static final String NAME_HASH_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NAME_HASH_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_HASH_DELIMITER",
                 "@");
         private static final String NAME_VALUE_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NAME_VALUE_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_VALUE_DELIMITER",
                 ", ");
         private static final String NAME_VALUE_SEPARATOR = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NAME_VALUE_SEPARATOR",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_VALUE_SEPARATOR",
                 "=");
         private static final String MAP_NAME_VALUE_SEPARATOR = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.MAP_NAME_VALUE_SEPARATOR",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.MAP_NAME_VALUE_SEPARATOR",
                 " => ");
         private static final String COLLECTION_START_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.COLLECTION_START_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.COLLECTION_START_DELIMITER",
                 "[");
         private static final String COLLECTION_STOP_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.COLLECTION_STOP_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.COLLECTION_STOP_DELIMITER",
                 "]");
         private static final String OMITTED_START_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.OMITTED_START_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.OMITTED_START_DELIMITER",
                 "... ");
         private static final String OMITTED_STOP_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.OMITTED_STOP_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.OMITTED_STOP_DELIMITER",
                 " omitted ...");
         private static final String NULL = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.NULL",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.NULL",
                 "null");
         private static final String STATE_STOP_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.STATE_STOP_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.STATE_STOP_DELIMITER",
                 "}");
         private static final String STATE_START_DELIMITER = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.STATE_START_DELIMITER",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.STATE_START_DELIMITER",
                 "{");
         private static final String BYTECODE_LOCATION_LABEL = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.BYTECODE_LOCATION_LABEL",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.BYTECODE_LOCATION_LABEL",
                 "Bytecode Location");
         private static final String INDENTATION = System.getProperty(
-                "_4axka.util.lang.ToStringBuilder.INDENTATION",
+                "tech.anaxka.common.utility.lang.ToStringBuilder.INDENTATION",
                 "    ");
         private static final String NEW_LINE = System.lineSeparator();
         private final Object __subject;
@@ -193,7 +295,7 @@ public final class ToString {
         }
 
         @Override
-        public String string() {
+        public String build() {
             final StringBuilder result_ = new StringBuilder();
 
             result_
@@ -304,18 +406,18 @@ public final class ToString {
             return unroll(array, __unrollDepth);
         }
 
-        private String unroll(final Map<?, ?> map, final Integer depth) {
+        private <K, V> String unroll(final Map<K, V> map, final Integer depth) {
             final StringBuilder builder_ = new StringBuilder();
             if (null != map) {
                 builder_.append(COLLECTION_START_DELIMITER);
                 int collectionIndex_ = 0;
-                final Iterator<?> items_ = map.keySet().iterator();
-                while (items_.hasNext() && collectionIndex_++ < depth) {
-                    final Object key_ = items_.next();
-                    builder_.append(wrap(key_).toString())
+                final Iterator<Map.Entry<K, V>> entries_ = map.entrySet().iterator();
+                while (entries_.hasNext() && collectionIndex_++ < depth) {
+                    Map.Entry<K, V> entry_ = entries_.next();
+                    builder_.append(wrap(entry_.getKey()).toString())
                             .append(MAP_NAME_VALUE_SEPARATOR)
-                            .append(wrap(map.get(key_)).toString());
-                    if (collectionIndex_ > 0 && items_.hasNext()) {
+                            .append(wrap(entry_.getValue()).toString());
+                    if (collectionIndex_ > 0 && entries_.hasNext()) {
                         builder_.append(NAME_VALUE_DELIMITER);
                     }
                 }

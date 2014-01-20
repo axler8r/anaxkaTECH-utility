@@ -26,74 +26,65 @@
  * of the authors and should not be interpreted as representing official policies,
  * either expressed or implied, of the FreeBSD Project.
  */
-package tech.anaxka.common.utility.lang;
+package tech.anaxka.common.utility.builder;
 
 
+import java.util.Set;
 import tech.anaxka.common.utility.functor.Builder;
 
 
 /**
- * A {@link Builder builder} to help construct concise {@link Object#hashCode() hash code}
- * implementations.
- *
+ * A {@linkplain Builder builder} for {@linkplain Set set} objects.
+ * 
+ * @param <T> the type of the {@linkplain Set set} under construction.
+ * 
  * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
- * @see Object#hashCode()
+ * @see Builder
+ * @see Set
  */
-public class HashCode {
+public class SetBuilder<T>
+        implements Builder<Set<T>> {
 
-    private HashCode() {
+    private final Set<T> __;
+
+    private SetBuilder(final Set<T> set) {
+        if (set == null) {
+            throw new IllegalArgumentException();
+        }
+        __ = set;
     }
 
     /**
-     * Returns an instance of a {@link Builder builder} to calculate the hash code of an
-     * {@link Object}.
+     * Creates a {@link SetBuilder builder} to make population of the specified {@link Set set}
+     * simple.
      *
-     * @return An {@link HashCodeBuilder}.
+     * @param <T>  the type of the {@link Set set} under construction. The Java compiler should be
+     *             intelligent enough to infer &lt;T&gt;.
+     * @param set the {@link Set set} under construction.
+     *
+     * @return A {@link SetBuilder builder} to continue the construction of the
+     *         {@linkplain Set underlying set}.
      */
-    public static HashCodeBuilder hashCodeBuilder() {
-        return new HashCodeBuilderImpl();
+    public static final <T> SetBuilder<T> setBuilder(final Set<T> set) {
+        return new SetBuilder<>(set);
     }
 
     /**
-     * Contract of a {@linkplain Object#hashCode() hash code} {@link Builder builder}.
+     * Adds an element to the @{link Set set} under construction.
+     * 
+     * @param element the element to add to the set.
+     *
+     * @return A {@link SetBuilder builder} to continue the construction of the
+     *         {@linkplain Set underlying set}.
      */
-    public static interface HashCodeBuilder
-            extends Builder<Integer> {
-
-        /**
-         * Appends object state to compute the {@linkplain Object#hashCode() hash code} of an
-         * {@link Object}.
-         *
-         * @param <S>     the type of the object state.
-         * @param subject the subject needed to help calculate a hash code.
-         *
-         * @return A {@link HashCodeBuilder builder} to continue constructing the {@code hashCode()}
-         *         operation.
-         */
-        <S> HashCodeBuilder append(S subject);
-
-        @Override
-        Integer build();
+    public final SetBuilder append(final T element) {
+        __.add(element);
+        return this;
     }
 
-    private static class HashCodeBuilderImpl
-            implements HashCodeBuilder {
-
-        private static final int PRIME = 31;
-        private int __result = 0;
-
-        private HashCodeBuilderImpl() {
-        }
-
-        @Override
-        public <S> HashCodeBuilder append(final S subject) {
-            __result = PRIME * __result + ((subject == null) ? 0 : subject.hashCode());
-            return this;
-        }
-
-        @Override
-        public Integer build() {
-            return __result;
-        }
+    /** {@inheritdoc} */
+    @Override
+    public Set<T> build() {
+        return __;
     }
 }
