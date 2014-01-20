@@ -29,7 +29,7 @@ public class CompareTo {
     }
 
     public static <T> boolean isComparable(final T that) {
-        return that != null;
+        return !(that == null);
     }
 
     /**

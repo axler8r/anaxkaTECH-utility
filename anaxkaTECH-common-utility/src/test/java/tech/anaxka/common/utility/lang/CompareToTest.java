@@ -633,7 +633,8 @@ public class CompareToTest {
 
         @Override
         public int compareTo(final TestData that) {
-            if (isComparable(that)) {
+//            if (isComparable(that)) {
+            if (that == null) {
                 return GREATER_THAN;
             } else {
                 return compareToBuilder()
