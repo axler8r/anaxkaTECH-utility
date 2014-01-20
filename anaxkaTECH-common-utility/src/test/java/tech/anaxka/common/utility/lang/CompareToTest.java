@@ -44,8 +44,8 @@ public class CompareToTest {
                 .append(
                         "Yesterday",
                         dateTimeBuilder()
-                        .setCurrentDateTime(new Date())
-                        .addDay(-1)
+                        .setDateTime(new Date())
+                        .addDays(-1)
                         .build())
                 .build(),
                 dateTimeBuilder()
@@ -98,8 +98,8 @@ public class CompareToTest {
     Object[][] symmetricTestData() {
         final Random random_ = new Random();
         final Date NOW = dateTimeBuilder().build();
-        final Date YESTERDAY = dateTimeBuilder().setCurrentDateTime(NOW).addDay(-1).build();
-        final Date TOMORROW = dateTimeBuilder().setCurrentDateTime(NOW).addDay(+1).build();
+        final Date YESTERDAY = dateTimeBuilder().setDateTime(NOW).addDays(-1).build();
+        final Date TOMORROW = dateTimeBuilder().setDateTime(NOW).addDays(+1).build();
         final String STRING = UUID.randomUUID().toString();
         final int INT = random_.nextInt();
         final float FLOAT = random_.nextFloat();
@@ -173,8 +173,8 @@ public class CompareToTest {
     Object[][] transitiveTestData() {
         final Random random_ = new Random();
         final Date NOW = dateTimeBuilder().build();
-        final Date YESTERDAY = dateTimeBuilder().setCurrentDateTime(NOW).addDay(-1).build();
-        final Date TOMORROW = dateTimeBuilder().setCurrentDateTime(NOW).addDay(+1).build();
+        final Date YESTERDAY = dateTimeBuilder().setDateTime(NOW).addDays(-1).build();
+        final Date TOMORROW = dateTimeBuilder().setDateTime(NOW).addDays(+1).build();
         final String STRING = UUID.randomUUID().toString();
         final int INT = random_.nextInt();
         final float FLOAT = random_.nextFloat();

@@ -28,53 +28,34 @@
  */
 package tech.anaxka.common.utility.exception;
 
+
 /**
+ * An exception that cannot be recovered from.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public class FatalException extends Exception {
+public class FatalException
+        extends Exception {
+
     private static final long serialVersionUID = -7494141881121987469L;
 
     /**
-     * <p>Constructor for FatalException.</p>
-     */
-    public FatalException() {}
-
-    /**
-     * <p>Constructor for FatalException.</p>
      *
-     * @param message a {@link java.lang.String} object.
      */
-    public FatalException(String message) {
-        super(message);
+    public FatalException() {
     }
 
     /**
-     * <p>Constructor for FatalException.</p>
+     * {@inheritdoc}
      *
-     * @param cause a {@link java.lang.Throwable} object.
-     */
-    public FatalException(Throwable cause) {
-        super(cause);
-    }
-
-    /**
-     * <p>Constructor for FatalException.</p>
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
-     */
-    public FatalException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    /**
-     * <p>Constructor for FatalException.</p>
-     *
-     * @param message a {@link java.lang.String} object.
-     * @param cause a {@link java.lang.Throwable} object.
-     * @param enableSuppression a boolean.
-     * @param writableStackTrace a boolean.
+     * @param message            see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param cause              see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param enableSuppression  see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
+     * @param writableStackTrace see {@link Exception#Exception(String message, Throwable cause,
+     *                           boolean enableSuppression, boolean writableStackTrace)}.
      */
     public FatalException(
             String message,
@@ -82,5 +63,33 @@ public class FatalException extends Exception {
             boolean enableSuppression,
             boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param message see {@link Exception#Exception(String message, Throwable cause)}.
+     * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
+     */
+    public FatalException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param message see {@link Exception#Exception(String message)}.
+     */
+    public FatalException(final String message) {
+        super(message);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param cause see {@link Exception#Exception(Throwable cause)}.
+     */
+    public FatalException(Throwable cause) {
+        super(cause);
     }
 }

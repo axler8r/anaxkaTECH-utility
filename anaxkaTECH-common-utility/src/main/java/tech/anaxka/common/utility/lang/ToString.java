@@ -28,6 +28,7 @@
  */
 package tech.anaxka.common.utility.lang;
 
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -36,101 +37,122 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import tech.anaxka.common.utility.functor.Builder;
 
+
 /**
+ * A {@link Builder builder} to help construct concise {@link Object#toString() toString}
+ * implementations.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
 public class ToString {
 
-    private ToString() {}
+    private ToString() {
+    }
 
     /**
-     * <p>toStringBuilder.</p>
+     * Creates a {@link ToStringBuilder}.
      *
-     * @param subject a {@link java.lang.Object} object.
-     * @return a {@link tech.anaxka.common.utility.lang.ToString.ToStringBuilder} object.
+     * @param subject the subject for which the toString operation will be created.
+     *
+     * @return a {@link Builder builder} to implement {@link Comparable#toString()} operations.
      */
     public static final ToStringBuilder toStringBuilder(final Object subject) {
         return new ToStringBuilderImpl(subject);
     }
 
     /**
-     *
+     * Contract of a {@linkplain Object#toString() to-string} {@link Builder builder}.
      */
-    public static interface ToStringBuilder extends Builder<String> {
+    public static interface ToStringBuilder
+            extends Builder<String> {
 
         /**
+         * Appends the label and subject to construct a string representation of an object.
          *
-         * @param <S>
-         * @param label
-         * @param subject
-         * @return
+         * @param <S>     the type of the subject &mdash; inferred by Javac.
+         * @param label   the label of the subject.
+         * @param subject the subject to append to the string representation of the object.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         <S> ToStringBuilder append(final String label, final S subject);
 
         /**
+         * Appends the label and a {@link Collection} to construct a string representation of an
+         * object.
          *
-         * @param <C>
-         * @param label
-         * @param collection
-         * @return
+         * @param <C>        the type of the element of a collection.
+         * @param label      the label of the collection.
+         * @param collection the collection.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         <C extends Collection<?>> ToStringBuilder append(final String label, final C collection);
 
         /**
+         * Appends a label and an array to construct a string representation of an object.
          *
-         * @param label
-         * @param array
-         * @return
+         * @param label the label of the array.
+         * @param array the content of the array.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         ToStringBuilder append(final String label, final Object[] array);
 
         /**
+         * Appends a label and a map to construct a string representation of an object.
          *
-         * @param <M>
-         * @param label
-         * @param map
-         * @return
+         * @param <M>   map.
+         * @param label label.
+         * @param map   the map to unroll.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         <M extends Map<?, ?>> ToStringBuilder append(final String label, final M map);
 
         /**
+         * How many elements in a collection should be displayed?
          *
-         * @param depth
-         * @return
+         * @param depth the number of elements that should be displayed.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         ToStringBuilder setUnrollDepth(final int depth);
 
         /**
+         * Should the {@link Object#toString()} operation pretty print the string?
          *
-         * @param pretty
-         * @return
+         * @param pretty {@code true} to pretty print the string. The default is {@code false}.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         ToStringBuilder setPrettyPrint(final boolean pretty);
 
         /**
+         * Should the operation display where the class was loaded from?
          *
-         * @param display
-         * @return
+         * @param display default is {@code true}.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         ToStringBuilder setDisplayLoadLocation(final boolean display);
 
         /**
+         * Utility operation to turn the output of {@link Object#toString()} into a pretty string.
          *
-         * @param string
-         * @return
+         * @param string the string to pretty print.
+         *
+         * @return A {@link ToStringBuilder} to continue construction of the string.
          */
         String prettyPrint(final String string);
 
-        /**
-         *
-         * @return
-         */
+        /** {@inheritDoc} */
         @Override
         String build();
     }
 
-    private static class ToStringBuilderImpl implements ToStringBuilder {
+    private static class ToStringBuilderImpl
+            implements ToStringBuilder {
 
         private static final String NAME_HASH_DELIMITER = System.getProperty(
                 "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_HASH_DELIMITER",

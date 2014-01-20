@@ -28,47 +28,60 @@
  */
 package tech.anaxka.common.utility.builder;
 
+
 import java.util.Map;
 import tech.anaxka.common.utility.functor.Builder;
 
+
 /**
- * <p>MapBuilder class.</p>
+ * A {@linkplain Builder builder} for {@linkplain Map map} objects.
  *
- * @author Adolf.Mattheus
- * @param <K>
- * @param <V>
- * @version $Id: $Id
- * @since 0.08.000.0000
+ * @param <K> the type of the Key for the {@link Map map} under construction.
+ * @param <V> the type of the Value for the {@link Map map} under construction.
+ *
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ * @see Builder
+ * @see Map
  */
-public class MapBuilder<K, V> implements Builder<Map<K, V>>{
+public class MapBuilder<K, V>
+        implements Builder<Map<K, V>> {
+
     private final Map<K, V> __;
 
-    private MapBuilder(Map<K, V> map) {
+    private MapBuilder(final Map<K, V> map) {
         if (map == null) {
             throw new IllegalArgumentException();
         }
 
         __ = map;
     }
-    
+
     /**
-     * <p>mapBuilder.</p>
+     * Creates a {@link MapBuilder builder} to make population of the specified {@link Map map}
+     * simple.
      *
-     * @param map a {@link java.util.Map} object.
-     * @param <K> a K object.
-     * @param <V> a V object.
-     * @return a {@link tech.anaxka.common.utility.builder.MapBuilder} object.
+     * @param <K> the type of the {@link Map map} under construction's <b>key</b>. The Java compiler
+     *            should be intelligent enough to infer &lt;K&gt;.
+     * @param <V> the type of the {@link Map map} under construction's <b>value</b>. The Java
+     *            compiler should be intelligent enough to infer &lt;V&gt;.
+     * @param map the {@link Map map} under construction.
+     *
+     * @return A {@link MapBuilder builder} to continue the construction of the
+     *         {@linkplain Map underlying map}.
      */
     public static <K, V> MapBuilder mapBuilder(final Map<K, V> map) {
         return new MapBuilder(map);
     }
 
     /**
-     * <p>append.</p>
+     * Adds a {@link Map.Entry entry} identified by the <b>key</b> and mapped to the <b>value</b> to
+     * the {@link Map map} under construction.
      *
-     * @param key a K object.
-     * @param value a V object.
-     * @return a {@link tech.anaxka.common.utility.builder.MapBuilder} object.
+     * @param key   key.
+     * @param value value.
+     *
+     * @return A {@link MapBuilder builder} to continue the construction of the
+     *         {@linkplain Map underlying map}.
      */
     public MapBuilder append(final K key, final V value) {
         __.put(key, value);
@@ -76,7 +89,7 @@ public class MapBuilder<K, V> implements Builder<Map<K, V>>{
         return this;
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritdoc} */
     @Override
     public Map<K, V> build() {
         return __;

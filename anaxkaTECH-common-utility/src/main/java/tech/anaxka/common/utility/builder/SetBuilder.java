@@ -28,18 +28,22 @@
  */
 package tech.anaxka.common.utility.builder;
 
+
 import java.util.Set;
 import tech.anaxka.common.utility.functor.Builder;
 
+
 /**
- * <p>SetBuilder class.</p>
- *
- * @author Adolf.Mattheus
- * @param <T>
- * @version $Id: $Id
- * @since 0.08.000.0000
+ * A {@linkplain Builder builder} for {@linkplain Set set} objects.
+ * 
+ * @param <T> the type of the {@linkplain Set set} under construction.
+ * 
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ * @see Builder
+ * @see Set
  */
-public class SetBuilder<T> implements Builder<Set<T>> {
+public class SetBuilder<T>
+        implements Builder<Set<T>> {
 
     private final Set<T> __;
 
@@ -51,28 +55,34 @@ public class SetBuilder<T> implements Builder<Set<T>> {
     }
 
     /**
-     * <p>setBuilder.</p>
+     * Creates a {@link SetBuilder builder} to make population of the specified {@link Set set}
+     * simple.
      *
-     * @param set a {@link java.util.Set} object.
-     * @param <T> a T object.
-     * @return a {@link tech.anaxka.common.utility.builder.SetBuilder} object.
+     * @param <T>  the type of the {@link Set set} under construction. The Java compiler should be
+     *             intelligent enough to infer &lt;T&gt;.
+     * @param set the {@link Set set} under construction.
+     *
+     * @return A {@link SetBuilder builder} to continue the construction of the
+     *         {@linkplain Set underlying set}.
      */
     public static final <T> SetBuilder<T> setBuilder(final Set<T> set) {
         return new SetBuilder<>(set);
     }
 
     /**
-     * <p>append.</p>
+     * Adds an element to the @{link Set set} under construction.
+     * 
+     * @param element the element to add to the set.
      *
-     * @param element a T object.
-     * @return a {@link tech.anaxka.common.utility.builder.SetBuilder} object.
+     * @return A {@link SetBuilder builder} to continue the construction of the
+     *         {@linkplain Set underlying set}.
      */
     public final SetBuilder append(final T element) {
         __.add(element);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /** {@inheritdoc} */
     @Override
     public Set<T> build() {
         return __;

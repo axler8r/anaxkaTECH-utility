@@ -28,18 +28,23 @@
  */
 package tech.anaxka.common.utility.data;
 
+
 import java.io.Serializable;
 
+
 /**
- *
- * @author Axl Mattheus
- * @param <ID>
+ * Identifies an object as having an identifier.
+ * 
+ * @param <ID> the type of the identifier.
+ * 
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
 public interface Identifiable<ID extends Comparable<ID> & Serializable> {
 
     /**
-     *
-     * @return
+     * Returns an object's identifier.
+     * 
+     * @return an instance of {@link Comparable} and {@link Serializable}.
      */
     ID getIdentifier();
 }

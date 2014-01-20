@@ -31,24 +31,26 @@ package tech.anaxka.common.utility.functor;
 
 import java.io.Serializable;
 
+
 /**
+ * A <a href="http://en.wikipedia.org/wiki/Function_object>functor</a> that modifies subjects.
  *
- * @author Axl Mattheus
- * @param <R>
- * @param <P>
- * @param <T>
+ * @param <S> the subject of the modification operation.
+ * @param <X> a possible exception that may be thrown as a result of the modification operation.
+ *
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public interface Modifier<
-                R extends Serializable,
-                P extends Serializable,
-                T extends Throwable> extends
-        Serializable {
+public interface Modifier<S, X extends Throwable>
+        extends Serializable {
+
     /**
-     * <p>modify.</p>
+     * Returns a modified subject.
      *
-     * @param parameter a P object.
-     * @return a R object.
-     * @throws T if any.
+     * @param subject the subject to be modified.
+     *
+     * @return A modified instance of the subject.
+     *
+     * @throws X if the modification operation fails.
      */
-    R modify(final P parameter) throws T;
+    S modify(final S subject) throws X;
 }

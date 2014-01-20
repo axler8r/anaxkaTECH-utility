@@ -28,46 +28,56 @@
  */
 package tech.anaxka.common.utility.lang;
 
+
 import tech.anaxka.common.utility.functor.Builder;
 
+
 /**
+ * A {@link Builder builder} to help construct concise {@link Object#hashCode() hash code}
+ * implementations.
  *
- * @author Axl Mattheus
+ * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
+ * @see Object#hashCode()
  */
 public class HashCode {
-    private HashCode() {}
+
+    private HashCode() {
+    }
 
     /**
-     * <p>hashCodeBuilder.</p>
+     * Returns an instance of a {@link Builder builder} to calculate the hash code of an
+     * {@link Object}.
      *
-     * @return a {@link tech.anaxka.common.utility.lang.HashCode.HashCodeBuilder} object.
+     * @return An {@link HashCodeBuilder}.
      */
     public static HashCodeBuilder hashCodeBuilder() {
         return new HashCodeBuilderImpl();
     }
 
     /**
-     *
+     * Contract of a {@linkplain Object#hashCode() hash code} {@link Builder builder}.
      */
-    public static interface HashCodeBuilder extends Builder<Integer> {
+    public static interface HashCodeBuilder
+            extends Builder<Integer> {
 
         /**
+         * Appends object state to compute the {@linkplain Object#hashCode() hash code} of an
+         * {@link Object}.
          *
-         * @param <S>
-         * @param subject
-         * @return
+         * @param <S>     the type of the object state.
+         * @param subject the subject needed to help calculate a hash code.
+         *
+         * @return A {@link HashCodeBuilder builder} to continue constructing the {@code hashCode()}
+         *         operation.
          */
         <S> HashCodeBuilder append(S subject);
 
-        /**
-         *
-         * @return
-         */
         @Override
         Integer build();
     }
 
-    private static class HashCodeBuilderImpl implements HashCodeBuilder {
+    private static class HashCodeBuilderImpl
+            implements HashCodeBuilder {
 
         private static final int PRIME = 31;
         private int __result = 0;
