@@ -14,4 +14,11 @@
             <goal>license:format</goal>
         </goals>
     </action>
+    <action>
+            <actionName>CUSTOM-create-javadoc</actionName>
+            <displayName>javadoc-create</displayName>
+            <goals>
+                <goal>javadoc:javadoc</goal>
+            </goals>
+        </action>
 </actions>
