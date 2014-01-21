@@ -30,6 +30,7 @@ package tech.anaxka.common.utility.builder;
 
 
 import java.util.Map;
+import java.util.Map.Entry;
 import tech.anaxka.common.utility.functor.Builder;
 
 
@@ -74,7 +75,7 @@ public class MapBuilder<K, V>
     }
 
     /**
-     * Adds a {@link Map.Entry entry} identified by the <b>key</b> and mapped to the <b>value</b> to
+     * Adds a {@link Entry entry} identified by the <b>key</b> and mapped to the <b>value</b> to
      * the {@link Map map} under construction.
      *
      * @param key   key.
@@ -89,7 +90,7 @@ public class MapBuilder<K, V>
         return this;
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     @Override
     public Map<K, V> build() {
         return __;
