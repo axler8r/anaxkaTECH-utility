@@ -39,14 +39,11 @@ public class DataRemovalException
 
     private static final long serialVersionUID = 1189132013822008561L;
 
-    /** {@inheritdoc} */
     public DataRemovalException() {
         super();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message            see {@link Exception#Exception(String message, Throwable cause,
      *                           boolean enableSuppression, boolean writableStackTrace)}.
      * @param cause              see {@link Exception#Exception(String message, Throwable cause,
@@ -65,8 +62,6 @@ public class DataRemovalException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message, Throwable cause)}.
      * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
@@ -75,8 +70,6 @@ public class DataRemovalException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message)}.
      */
     public DataRemovalException(final String message) {
@@ -84,8 +77,6 @@ public class DataRemovalException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataRemovalException(final Throwable cause) {

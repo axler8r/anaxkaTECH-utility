@@ -39,14 +39,11 @@ public class DatabaseException
 
     private static final long serialVersionUID = 1414063319978461778L;
 
-    /** {@inheritdoc} */
     public DatabaseException() {
         super();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message            see {@link Exception#Exception(String message, Throwable cause,
      *                           boolean enableSuppression, boolean writableStackTrace)}.
      * @param cause              see {@link Exception#Exception(String message, Throwable cause,
@@ -65,8 +62,6 @@ public class DatabaseException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message, Throwable cause)}.
      * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
@@ -75,8 +70,6 @@ public class DatabaseException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message)}.
      */
     public DatabaseException(final String message) {
@@ -84,8 +77,6 @@ public class DatabaseException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DatabaseException(final Throwable cause) {

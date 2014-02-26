@@ -310,7 +310,7 @@ public class DateTimeBuilder
         return this;
     }
 
-    /** {@inheritdoc} */
+    /** {@inheritDoc} */
     @Override
     public Date build() {
         return __.getTime();

@@ -40,14 +40,11 @@ public class DataAdditionException
 
     private static final long serialVersionUID = -3169874025586153627L;
 
-    /** {@inheritdoc} */
     public DataAdditionException() {
         super();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message            see {@link Exception#Exception(String message, Throwable cause,
      *                           boolean enableSuppression, boolean writableStackTrace)}.
      * @param cause              see {@link Exception#Exception(String message, Throwable cause,
@@ -66,8 +63,6 @@ public class DataAdditionException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message, Throwable cause)}.
      * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
@@ -76,8 +71,6 @@ public class DataAdditionException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message)}.
      */
     public DataAdditionException(final String message) {
@@ -85,8 +78,6 @@ public class DataAdditionException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataAdditionException(final Throwable cause) {

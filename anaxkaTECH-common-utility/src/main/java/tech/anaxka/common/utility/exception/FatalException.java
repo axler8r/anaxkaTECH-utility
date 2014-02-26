@@ -46,8 +46,6 @@ public class FatalException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message            see {@link Exception#Exception(String message, Throwable cause,
      *                           boolean enableSuppression, boolean writableStackTrace)}.
      * @param cause              see {@link Exception#Exception(String message, Throwable cause,
@@ -66,8 +64,6 @@ public class FatalException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message, Throwable cause)}.
      * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
@@ -76,8 +72,6 @@ public class FatalException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message)}.
      */
     public FatalException(final String message) {
@@ -85,8 +79,6 @@ public class FatalException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public FatalException(Throwable cause) {

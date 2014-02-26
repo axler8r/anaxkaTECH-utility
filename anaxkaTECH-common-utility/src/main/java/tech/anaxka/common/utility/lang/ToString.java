@@ -54,7 +54,7 @@ public class ToString {
      *
      * @param subject the subject for which the toString operation will be created.
      *
-     * @return a {@link Builder builder} to implement {@link Comparable#toString()} operations.
+     * @return a {@link Builder builder} to implement {@link Object#toString()} operations.
      */
     public static final ToStringBuilder toStringBuilder(final Object subject) {
         return new ToStringBuilderImpl(subject);
