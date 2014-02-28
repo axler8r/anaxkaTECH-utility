@@ -26,25 +26,28 @@
  * of the authors and should not be interpreted as representing official policies,
  * either expressed or implied, of the FreeBSD Project.
  */
-package tech.anaxka.common.utility.data;
-
-
-import java.io.Serializable;
+package tech.anaxka.common.utility.functor;
 
 
 /**
- * Identifies an object as having an identifier.
- * 
- * @param <ID> the type of the identifier.
- * 
+ * Transforms an object from one instance to another.
+ *
+ * @param <S>  the source type.
+ * @param <T>  the target type.
+ * @param <X> an exception that may the thrown during the transformation operation.
+ *
  * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public interface Identifiable<ID extends Comparable<ID> & Serializable> {
+public interface Transrormer<S, T, X extends Throwable> {
 
     /**
-     * Returns an object's identifier.
-     * 
-     * @return an instance of {@link Comparable} and {@link Serializable}.
+     * Transforms a source object into a target object.
+     *
+     * @param source the source of the transformation.
+     *
+     * @return a transformed object.
+     *
+     * @throws X if the transformation encounters a exceptional condition.
      */
-    ID getIdentifier();
+    T transform(final S source) throws X;
 }

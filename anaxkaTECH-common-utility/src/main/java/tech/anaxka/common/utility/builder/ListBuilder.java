@@ -26,74 +26,66 @@
  * of the authors and should not be interpreted as representing official policies,
  * either expressed or implied, of the FreeBSD Project.
  */
-package tech.anaxka.common.utility.lang;
+package tech.anaxka.common.utility.builder;
 
 
+import java.util.List;
 import tech.anaxka.common.utility.functor.Builder;
 
 
 /**
- * A {@link Builder builder} to help construct concise {@link Object#hashCode() hash code}
- * implementations.
+ * A {@linkplain Builder builder} for {@linkplain List list} objects.
+ *
+ * @param <T> the type of the @{link List list} under construction.
  *
  * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
- * @see Object#hashCode()
+ * @see Builder
+ * @see List
  */
-public class HashCode {
+public class ListBuilder<T>
+        implements Builder<List<T>> {
 
-    private HashCode() {
+    private final List<T> __;
+
+    private ListBuilder(final List<T> list) {
+        if (list == null) {
+            throw new IllegalArgumentException();
+        }
+
+        __ = list;
     }
 
     /**
-     * Returns an instance of a {@link Builder builder} to calculate the hash code of an
-     * {@link Object}.
+     * Creates a {@link ListBuilder builder} to make population of the specified {@link List list}
+     * simple.
      *
-     * @return An {@link HashCodeBuilder}.
+     * @param <T>  the type of the {@link List list} under construction. The Java compiler should be
+     *             intelligent enough to infer &lt;T&gt;.
+     * @param list the {@link List list} under construction.
+     *
+     * @return A {@link ListBuilder builder} to continue the construction of the
+     *         {@linkplain List underlying list}.
      */
-    public static HashCodeBuilder hashCodeBuilder() {
-        return new HashCodeBuilderImpl();
+    public static final <T> ListBuilder listBuilder(final List<T> list) {
+        return new ListBuilder(list);
     }
 
     /**
-     * Contract of a {@linkplain Object#hashCode() hash code} {@link Builder builder}.
+     * Adds an element to the @{link List list} under construction.
+     * 
+     * @param element the element to add to the list.
+     *
+     * @return A {@link ListBuilder builder} to continue the construction of the
+     *         {@linkplain List underlying list}.
      */
-    public static interface HashCodeBuilder
-            extends Builder<Integer> {
-
-        /**
-         * Appends object state to compute the {@linkplain Object#hashCode() hash code} of an
-         * {@link Object}.
-         *
-         * @param <S>     the type of the object state.
-         * @param subject the subject needed to help calculate a hash code.
-         *
-         * @return A {@link HashCodeBuilder builder} to continue constructing the {@code hashCode()}
-         *         operation.
-         */
-        <S> HashCodeBuilder append(S subject);
-
-        @Override
-        Integer build();
+    public ListBuilder append(final T element) {
+        __.add(element);
+        return this;
     }
 
-    private static class HashCodeBuilderImpl
-            implements HashCodeBuilder {
-
-        private static final int PRIME = 31;
-        private int __result = 0;
-
-        private HashCodeBuilderImpl() {
-        }
-
-        @Override
-        public <S> HashCodeBuilder append(final S subject) {
-            __result = PRIME * __result + ((subject == null) ? 0 : subject.hashCode());
-            return this;
-        }
-
-        @Override
-        public Integer build() {
-            return __result;
-        }
+    /** {@inheritdoc} */
+    @Override
+    public List<T> build() {
+        return __;
     }
 }

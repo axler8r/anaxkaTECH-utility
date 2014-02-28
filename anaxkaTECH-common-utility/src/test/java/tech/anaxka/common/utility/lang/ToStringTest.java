@@ -1,16 +1,3 @@
-// $Id$
-
-/*
- * \u00A9 2012, 4axka (Pty) Ltd.  All rights reserved.
- *
- * The content of ToStringTest.java is strictly CONFIDENTIAL.
- *
- * It may not be viewed as a whole, or in part by any unauthorised party unless
- * explicit permission has been granted by an authorised 4axka representative.
- *
- * It may not be reproduced as a whole, or in part by any means unless explicit
- * permission has been granted by an authorised 4axka representative.
- */
 package tech.anaxka.common.utility.lang;
 
 import java.math.BigDecimal;
@@ -27,6 +14,10 @@ import org.testng.annotations.Test;
 
 import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
 
+/**
+ *
+ * @author Axl Mattheus
+ */
 public class ToStringTest {
 
     @BeforeClass
@@ -123,12 +114,20 @@ public class ToStringTest {
         return new Object[][]{{root_}};
     }
 
-    @Test(dataProvider = "root")
+    /**
+     *
+     * @param root
+     */
+    @Test(dataProvider = "root", enabled = false)
     public void toStringTest(final Node root) {
         System.out.println(root.toString());
     }
 
-    @Test(dataProvider = "root")
+    /**
+     *
+     * @param root
+     */
+    @Test(dataProvider = "root", enabled = false)
     public void toStringPrettyPrintTest(final Node root) {
         System.out.println(toStringBuilder(this).prettyPrint(root.toString()));
     }
