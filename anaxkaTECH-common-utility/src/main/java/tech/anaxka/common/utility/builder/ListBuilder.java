@@ -31,6 +31,7 @@ package tech.anaxka.common.utility.builder;
 
 import java.util.List;
 import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.common.utility.functor.FunctorException;
 
 
 /**
@@ -43,7 +44,7 @@ import tech.anaxka.common.utility.functor.Builder;
  * @see List
  */
 public class ListBuilder<T>
-        implements Builder<List<T>> {
+        implements Builder<List<T>, FunctorException> {
 
     private final List<T> __;
 

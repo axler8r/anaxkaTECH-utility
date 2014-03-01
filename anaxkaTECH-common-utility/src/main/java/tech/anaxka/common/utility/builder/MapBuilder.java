@@ -32,6 +32,7 @@ package tech.anaxka.common.utility.builder;
 import java.util.Map;
 import java.util.Map.Entry;
 import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.common.utility.functor.FunctorException;
 
 
 /**
@@ -45,7 +46,7 @@ import tech.anaxka.common.utility.functor.Builder;
  * @see Map
  */
 public class MapBuilder<K, V>
-        implements Builder<Map<K, V>> {
+        implements Builder<Map<K, V>, FunctorException> {
 
     private final Map<K, V> __;
 

@@ -84,7 +84,7 @@ public class Equals {
      * Contract of a {@linkplain Object#equals(java.lang.Object) equals} {@link Builder builder}.
      */
     public static interface EqualsBuilder
-            extends Builder<Boolean> {
+            extends Builder<Boolean, EqualsBuildException> {
 
         /**
          * Appends object state of the left-hand-side and right-hand-side of the

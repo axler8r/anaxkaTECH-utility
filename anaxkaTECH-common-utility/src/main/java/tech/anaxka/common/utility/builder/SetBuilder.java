@@ -31,19 +31,20 @@ package tech.anaxka.common.utility.builder;
 
 import java.util.Set;
 import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.common.utility.functor.FunctorException;
 
 
 /**
  * A {@linkplain Builder builder} for {@linkplain Set set} objects.
- * 
+ *
  * @param <T> the type of the {@linkplain Set set} under construction.
- * 
+ *
  * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  * @see Builder
  * @see Set
  */
 public class SetBuilder<T>
-        implements Builder<Set<T>> {
+        implements Builder<Set<T>, FunctorException> {
 
     private final Set<T> __;
 
@@ -58,8 +59,8 @@ public class SetBuilder<T>
      * Creates a {@link SetBuilder builder} to make population of the specified {@link Set set}
      * simple.
      *
-     * @param <T>  the type of the {@link Set set} under construction. The Java compiler should be
-     *             intelligent enough to infer &lt;T&gt;.
+     * @param <T> the type of the {@link Set set} under construction. The Java compiler should be
+     *            intelligent enough to infer &lt;T&gt;.
      * @param set the {@link Set set} under construction.
      *
      * @return A {@link SetBuilder builder} to continue the construction of the
@@ -71,7 +72,7 @@ public class SetBuilder<T>
 
     /**
      * Adds an element to the @{link Set set} under construction.
-     * 
+     *
      * @param element the element to add to the set.
      *
      * @return A {@link SetBuilder builder} to continue the construction of the

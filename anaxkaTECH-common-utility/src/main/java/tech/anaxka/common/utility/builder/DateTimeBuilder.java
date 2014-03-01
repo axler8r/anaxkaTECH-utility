@@ -34,6 +34,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.common.utility.functor.FunctorException;
 
 import static java.util.Calendar.getInstance;
 
@@ -46,7 +47,7 @@ import static java.util.Calendar.getInstance;
  * @see Date
  */
 public class DateTimeBuilder
-        implements Builder<Date> {
+        implements Builder<Date, FunctorException> {
 
     private final Calendar __;
 
@@ -214,7 +215,7 @@ public class DateTimeBuilder
      * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
      *         {@link Date time}.
      */
-    public DateTimeBuilder addSecondFractions(final int fractions) {
+    public DateTimeBuilder addSecondFraction(final int fractions) {
         __.add(Calendar.MILLISECOND, fractions);
         return this;
     }

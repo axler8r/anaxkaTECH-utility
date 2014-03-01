@@ -58,7 +58,7 @@ public class HashCode {
      * Contract of a {@linkplain Object#hashCode() hash code} {@link Builder builder}.
      */
     public static interface HashCodeBuilder
-            extends Builder<Integer> {
+            extends Builder<Integer, HashCodeBuildException> {
 
         /**
          * Appends object state to compute the {@linkplain Object#hashCode() hash code} of an

@@ -64,7 +64,7 @@ public class ToString {
      * Contract of a {@linkplain Object#toString() to-string} {@link Builder builder}.
      */
     public static interface ToStringBuilder
-            extends Builder<String> {
+            extends Builder<String, ToStringBuildException> {
 
         /**
          * Appends the label and subject to construct a string representation of an object.
