@@ -45,7 +45,7 @@ import tech.anaxka.common.utility.functor.FunctorException;
  * @see Builder
  * @see Map
  */
-public class MapBuilder<K, V>
+public final class MapBuilder<K, V>
         implements Builder<Map<K, V>, FunctorException> {
 
     private final Map<K, V> __;

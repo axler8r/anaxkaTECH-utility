@@ -43,7 +43,7 @@ import tech.anaxka.common.utility.functor.FunctorException;
  * @see Builder
  * @see Set
  */
-public class SetBuilder<T>
+public final class SetBuilder<T>
         implements Builder<Set<T>, FunctorException> {
 
     private final Set<T> __;

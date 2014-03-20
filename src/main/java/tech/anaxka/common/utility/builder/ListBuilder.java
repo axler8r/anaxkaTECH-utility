@@ -43,7 +43,7 @@ import tech.anaxka.common.utility.functor.FunctorException;
  * @see Builder
  * @see List
  */
-public class ListBuilder<T>
+public final class ListBuilder<T>
         implements Builder<List<T>, FunctorException> {
 
     private final List<T> __;

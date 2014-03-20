@@ -46,7 +46,7 @@ import static java.util.Calendar.getInstance;
  * @see Builder
  * @see Date
  */
-public class DateTimeBuilder
+public final class DateTimeBuilder
         implements Builder<Date, FunctorException> {
 
     private final Calendar __;
@@ -124,7 +124,11 @@ public class DateTimeBuilder
      *         {@linkplain Date time}.
      */
     public DateTimeBuilder setDateTime(final Date instant) {
+        if (instant == null) {
+            throw new IllegalArgumentException("");
+        }
         __.setTime(instant);
+
         return this;
     }
 
@@ -210,13 +214,13 @@ public class DateTimeBuilder
      * Add the specified number of fraction(s) of a second to the {@link Date date} under
      * construction.
      *
-     * @param fractions a positive or negative number to add to the year.
+     * @param millis a positive or negative number to add to the milli seconds.
      *
      * @return A {@link DateTimeBuilder builder} to continue the construction of an instant in
      *         {@link Date time}.
      */
-    public DateTimeBuilder addSecondFraction(final int fractions) {
-        __.add(Calendar.MILLISECOND, fractions);
+    public DateTimeBuilder addMilliseconds(final int millis) {
+        __.add(Calendar.MILLISECOND, millis);
         return this;
     }
 
@@ -308,6 +312,11 @@ public class DateTimeBuilder
      */
     public DateTimeBuilder setSecondFraction(final int fraction) {
         __.set(Calendar.MILLISECOND, fraction);
+        return this;
+    }
+
+    public DateTimeBuilder reset() {
+        __.clear();
         return this;
     }
 
