@@ -26,74 +26,66 @@
  * of the authors and should not be interpreted as representing official policies,
  * either expressed or implied, of the FreeBSD Project.
  */
-package tech.anaxka.common.utility.lang;
+package tech.anaxka.common.utility.functor;
 
 
-import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.common.utility.exception.NonFatalException;
 
 
 /**
- * A {@link Builder builder} to help construct concise {@link Object#hashCode() hash code}
- * implementations.
  *
  * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
- * @see Object#hashCode()
  */
-public class HashCode {
+public class FunctorException
+        extends NonFatalException {
 
-    private HashCode() {
+    private static final long serialVersionUID = 8916733348181179199L;
+
+    /** {@inheritDoc} */
+    public FunctorException() {
     }
 
     /**
-     * Returns an instance of a {@link Builder builder} to calculate the hash code of an
-     * {@link Object}.
+     * {@inheritDoc}
      *
-     * @return An {@link HashCodeBuilder}.
+     * @param message
      */
-    public static HashCodeBuilder hashCodeBuilder() {
-        return new HashCodeBuilderImpl();
+    public FunctorException(final String message) {
+        super(message);
     }
 
     /**
-     * Contract of a {@linkplain Object#hashCode() hash code} {@link Builder builder}.
+     * {@inheritDoc}
+     *
+     * @param message
+     * @param cause
      */
-    public static interface HashCodeBuilder
-            extends Builder<Integer, HashCodeBuildException> {
-
-        /**
-         * Appends object state to compute the {@linkplain Object#hashCode() hash code} of an
-         * {@link Object}.
-         *
-         * @param <S>     the type of the object state.
-         * @param subject the subject needed to help calculate a hash code.
-         *
-         * @return A {@link HashCodeBuilder builder} to continue constructing the {@code hashCode()}
-         *         operation.
-         */
-        <S> HashCodeBuilder append(S subject);
-
-        @Override
-        Integer build();
+    public FunctorException(final String message, final Throwable cause) {
+        super(message, cause);
     }
 
-    private static class HashCodeBuilderImpl
-            implements HashCodeBuilder {
+    /**
+     * {@inheritDoc}
+     *
+     * @param cause
+     */
+    public FunctorException(final Throwable cause) {
+        super(cause);
+    }
 
-        private static final int PRIME = 31;
-        private int __result = 0;
-
-        private HashCodeBuilderImpl() {
-        }
-
-        @Override
-        public <S> HashCodeBuilder append(final S subject) {
-            __result = PRIME * __result + ((subject == null) ? 0 : subject.hashCode());
-            return this;
-        }
-
-        @Override
-        public Integer build() {
-            return __result;
-        }
+    /**
+     * {@inheritDoc}
+     *
+     * @param message
+     * @param cause
+     * @param enableSuppression
+     * @param writableStackTrace
+     */
+    public FunctorException(
+            final String message,
+            final Throwable cause,
+            final boolean enableSuppression,
+            final boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

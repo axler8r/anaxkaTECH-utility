@@ -33,13 +33,15 @@ package tech.anaxka.common.utility.functor;
  * A <a href="http://en.wikipedia.org/wiki/Builder_pattern">builder</a>.
  * 
  * @param <T> the type of object under construction.
+ * @param <X> an exception to throw if the {@linkplain #build()} operation is unsuccessful.
  * 
  * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
  */
-public interface Builder<T> {
+public interface Builder<T, X extends Throwable> {
 
     /**
      * @return the constructed object.
+     * @throws X if the {@linkplain #build()} operation fails.
      */
-    T build();
+    T build() throws X;
 }

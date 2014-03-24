@@ -39,14 +39,11 @@ public class DataSearchException
 
     private static final long serialVersionUID = -1985413978207527418L;
 
-    /** {@inheritdoc} */
     public DataSearchException() {
         super();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message            see {@link Exception#Exception(String message, Throwable cause,
      *                           boolean enableSuppression, boolean writableStackTrace)}.
      * @param cause              see {@link Exception#Exception(String message, Throwable cause,
@@ -65,8 +62,6 @@ public class DataSearchException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message, Throwable cause)}.
      * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
@@ -75,8 +70,6 @@ public class DataSearchException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message)}.
      */
     public DataSearchException(final String message) {
@@ -84,8 +77,6 @@ public class DataSearchException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataSearchException(final Throwable cause) {

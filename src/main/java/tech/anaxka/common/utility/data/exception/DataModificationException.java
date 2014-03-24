@@ -39,14 +39,11 @@ public class DataModificationException
 
     private static final long serialVersionUID = -2822969952385376751L;
 
-    /** {@inheritdoc} */
     public DataModificationException() {
         super();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message            see {@link Exception#Exception(String message, Throwable cause,
      *                           boolean enableSuppression, boolean writableStackTrace)}.
      * @param cause              see {@link Exception#Exception(String message, Throwable cause,
@@ -65,8 +62,6 @@ public class DataModificationException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message, Throwable cause)}.
      * @param cause   see {@link Exception#Exception(String message, Throwable cause)}.
      */
@@ -75,8 +70,6 @@ public class DataModificationException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param message see {@link Exception#Exception(String message)}.
      */
     public DataModificationException(final String message) {
@@ -84,8 +77,6 @@ public class DataModificationException
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param cause see {@link Exception#Exception(Throwable cause)}.
      */
     public DataModificationException(final Throwable cause) {
