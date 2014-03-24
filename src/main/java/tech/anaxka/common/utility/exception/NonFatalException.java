@@ -26,66 +26,51 @@
  * of the authors and should not be interpreted as representing official policies,
  * either expressed or implied, of the FreeBSD Project.
  */
-package tech.anaxka.common.utility.builder;
-
-
-import java.util.Set;
-import tech.anaxka.common.utility.functor.Builder;
-import tech.anaxka.common.utility.functor.FunctorException;
+package tech.anaxka.common.utility.exception;
 
 
 /**
- * A {@linkplain Builder builder} for {@linkplain Set set} objects.
- *
- * @param <T> the type of the {@linkplain Set set} under construction.
  *
  * @author <a href="mailto:info@anaxka.tech?Subject=RFI">anaxkaTECH (Pty) Ltd</a>
- * @see Builder
- * @see Set
  */
-public final class SetBuilder<T>
-        implements Builder<Set<T>, FunctorException> {
+public class NonFatalException
+        extends RuntimeException {
 
-    private final Set<T> __;
-
-    private SetBuilder(final Set<T> set) {
-        if (set == null) {
-            throw new IllegalArgumentException();
-        }
-        __ = set;
-    }
-
-    /**
-     * Creates a {@link SetBuilder builder} to make population of the specified {@link Set set}
-     * simple.
-     *
-     * @param <T> the type of the {@link Set set} under construction. The Java compiler should be
-     *            intelligent enough to infer &lt;T&gt;.
-     * @param set the {@link Set set} under construction.
-     *
-     * @return A {@link SetBuilder builder} to continue the construction of the
-     *         {@linkplain Set underlying set}.
-     */
-    public static final <T> SetBuilder<T> setBuilder(final Set<T> set) {
-        return new SetBuilder<>(set);
-    }
-
-    /**
-     * Adds an element to the @{link Set set} under construction.
-     *
-     * @param element the element to add to the set.
-     *
-     * @return A {@link SetBuilder builder} to continue the construction of the
-     *         {@linkplain Set underlying set}.
-     */
-    public final SetBuilder append(final T element) {
-        __.add(element);
-        return this;
-    }
+    private static final long serialVersionUID = -5334832583341741315L;
 
     /** {@inheritDoc} */
-    @Override
-    public Set<T> build() {
-        return __;
+    public NonFatalException() {
+    }
+
+    /** {@inheritDoc}
+     * @param message */
+    public NonFatalException(final String message) {
+        super(message);
+    }
+
+    /** {@inheritDoc}
+     * @param message
+     * @param cause */
+    public NonFatalException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    /** {@inheritDoc}
+     * @param cause */
+    public NonFatalException(final Throwable cause) {
+        super(cause);
+    }
+
+    /** {@inheritDoc}
+     * @param message
+     * @param cause
+     * @param enableSuppression
+     * @param writableStackTrace */
+    public NonFatalException(
+            final String message,
+            final Throwable cause,
+            final boolean enableSuppression,
+            final boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

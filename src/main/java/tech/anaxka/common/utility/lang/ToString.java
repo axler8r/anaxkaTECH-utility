@@ -54,7 +54,7 @@ public class ToString {
      *
      * @param subject the subject for which the toString operation will be created.
      *
-     * @return a {@link Builder builder} to implement {@link Comparable#toString()} operations.
+     * @return a {@link Builder builder} to implement {@link Object#toString()} operations.
      */
     public static final ToStringBuilder toStringBuilder(final Object subject) {
         return new ToStringBuilderImpl(subject);
@@ -64,7 +64,7 @@ public class ToString {
      * Contract of a {@linkplain Object#toString() to-string} {@link Builder builder}.
      */
     public static interface ToStringBuilder
-            extends Builder<String> {
+            extends Builder<String, ToStringBuildException> {
 
         /**
          * Appends the label and subject to construct a string representation of an object.

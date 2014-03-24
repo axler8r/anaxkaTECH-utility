@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.anaxka</groupId>
-    <artifactId>anaxkaTECH-common-utility</artifactId>
-    <name>anaxkaTECH-common-utility</name>
+    <artifactId>anaxkaTECH-utility-lib</artifactId>
+    <name>anaxkaTECH-utility-lib</name>
     <version>0.09.000.0000-SNAPSHOT</version>
     <packaging>jar</packaging>
     <organization>
@@ -75,12 +75,14 @@
         </plugins>
     </build>
     <dependencies>
+        <!--
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.8.7</version>
             <scope>test</scope>
         </dependency>
+        -->
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

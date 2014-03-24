@@ -84,7 +84,7 @@ public class CompareTo {
      * {@linkplain Comparable#compareTo(java.lang.Object) compare-to} {@link Builder builder}.
      */
     public static interface CompareToBuilder
-            extends Builder<Integer> {
+            extends Builder<Integer, CompareToBuildException> {
 
         /**
          * Appends object state of the left-hand-side and right-hand-side of the
