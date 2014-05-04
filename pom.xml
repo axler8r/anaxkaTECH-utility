@@ -5,7 +5,7 @@
     <groupId>tech.anaxka</groupId>
     <artifactId>anaxkaTECH-utility-lib</artifactId>
     <name>anaxkaTECH-utility-lib</name>
-    <version>0.09.000.0000-SNAPSHOT</version>
+    <version>0.09.001.0000-SNAPSHOT</version>
     <packaging>jar</packaging>
     <organization>
         <name>4axka (Pty) Ltd</name>
@@ -75,14 +75,6 @@
         </plugins>
     </build>
     <dependencies>
-        <!--
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.8.7</version>
-            <scope>test</scope>
-        </dependency>
-        -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
