@@ -29,7 +29,7 @@
 package tech.anaxka.util.lang;
 
 
-import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.util.functor.Builder;
 
 
 /**

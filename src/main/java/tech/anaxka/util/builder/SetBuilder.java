@@ -30,8 +30,8 @@ package tech.anaxka.util.builder;
 
 
 import java.util.Set;
-import tech.anaxka.common.utility.functor.Builder;
-import tech.anaxka.common.utility.functor.FunctorException;
+import tech.anaxka.util.functor.Builder;
+import tech.anaxka.util.functor.FunctorException;
 
 
 /**

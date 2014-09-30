@@ -33,7 +33,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.util.functor.Builder;
 
 
 /**

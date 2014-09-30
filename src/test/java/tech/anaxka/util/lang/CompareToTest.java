@@ -12,15 +12,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
-import static tech.anaxka.common.utility.builder.DateTimeBuilder.dateTimeBuilder;
-import static tech.anaxka.common.utility.builder.MapBuilder.mapBuilder;
-import static tech.anaxka.common.utility.lang.CompareTo.EQUAL;
-import static tech.anaxka.common.utility.lang.CompareTo.GREATER_THAN;
-import static tech.anaxka.common.utility.lang.CompareTo.compareToBuilder;
-import static tech.anaxka.common.utility.lang.CompareTo.isComparable;
-import static tech.anaxka.common.utility.lang.Equals.equalsBuilder;
-import static tech.anaxka.common.utility.lang.Equals.isEquatable;
-import static tech.anaxka.common.utility.lang.HashCode.hashCodeBuilder;
+import static tech.anaxka.util.builder.DateTimeBuilder.dateTimeBuilder;
+import static tech.anaxka.util.builder.MapBuilder.mapBuilder;
+import static tech.anaxka.util.lang.CompareTo.EQUAL;
+import static tech.anaxka.util.lang.CompareTo.GREATER_THAN;
+import static tech.anaxka.util.lang.CompareTo.compareToBuilder;
+import static tech.anaxka.util.lang.CompareTo.isComparable;
+import static tech.anaxka.util.lang.Equals.equalsBuilder;
+import static tech.anaxka.util.lang.Equals.isEquatable;
+import static tech.anaxka.util.lang.HashCode.hashCodeBuilder;
 
 /**
  *
