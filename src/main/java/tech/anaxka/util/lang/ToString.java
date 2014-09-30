@@ -35,7 +35,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import tech.anaxka.common.utility.functor.Builder;
+import tech.anaxka.util.functor.Builder;
 
 
 /**
@@ -155,43 +155,43 @@ public class ToString {
             implements ToStringBuilder {
 
         private static final String NAME_HASH_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_HASH_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.NAME_HASH_DELIMITER",
                 "@");
         private static final String NAME_VALUE_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_VALUE_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.NAME_VALUE_DELIMITER",
                 ", ");
         private static final String NAME_VALUE_SEPARATOR = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.NAME_VALUE_SEPARATOR",
+                "tech.anaxka.util.lang.ToStringBuilder.NAME_VALUE_SEPARATOR",
                 "=");
         private static final String MAP_NAME_VALUE_SEPARATOR = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.MAP_NAME_VALUE_SEPARATOR",
+                "tech.anaxka.util.lang.ToStringBuilder.MAP_NAME_VALUE_SEPARATOR",
                 " => ");
         private static final String COLLECTION_START_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.COLLECTION_START_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.COLLECTION_START_DELIMITER",
                 "[");
         private static final String COLLECTION_STOP_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.COLLECTION_STOP_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.COLLECTION_STOP_DELIMITER",
                 "]");
         private static final String OMITTED_START_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.OMITTED_START_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.OMITTED_START_DELIMITER",
                 "... ");
         private static final String OMITTED_STOP_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.OMITTED_STOP_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.OMITTED_STOP_DELIMITER",
                 " omitted ...");
         private static final String NULL = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.NULL",
+                "tech.anaxka.util.lang.ToStringBuilder.NULL",
                 "null");
         private static final String STATE_STOP_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.STATE_STOP_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.STATE_STOP_DELIMITER",
                 "}");
         private static final String STATE_START_DELIMITER = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.STATE_START_DELIMITER",
+                "tech.anaxka.util.lang.ToStringBuilder.STATE_START_DELIMITER",
                 "{");
         private static final String BYTECODE_LOCATION_LABEL = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.BYTECODE_LOCATION_LABEL",
+                "tech.anaxka.util.lang.ToStringBuilder.BYTECODE_LOCATION_LABEL",
                 "Bytecode Location");
         private static final String INDENTATION = System.getProperty(
-                "tech.anaxka.common.utility.lang.ToStringBuilder.INDENTATION",
+                "tech.anaxka.util.lang.ToStringBuilder.INDENTATION",
                 "    ");
         private static final String NEW_LINE = System.lineSeparator();
         private final Object __subject;

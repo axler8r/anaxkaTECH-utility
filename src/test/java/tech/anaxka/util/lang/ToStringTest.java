@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static tech.anaxka.common.utility.lang.ToString.toStringBuilder;
+import static tech.anaxka.util.lang.ToString.toStringBuilder;
 
 /**
  *

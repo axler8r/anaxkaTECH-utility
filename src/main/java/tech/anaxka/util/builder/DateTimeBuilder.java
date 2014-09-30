@@ -33,8 +33,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import tech.anaxka.common.utility.functor.Builder;
-import tech.anaxka.common.utility.functor.FunctorException;
+import tech.anaxka.util.functor.Builder;
+import tech.anaxka.util.functor.FunctorException;
 
 import static java.util.Calendar.getInstance;
 
